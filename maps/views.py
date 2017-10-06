@@ -55,5 +55,5 @@ def wells(request):
 def publicplaces(request):
     url="https://10.0.3.23:8787/publicplaces/?format=json"
     response=urllib.urlopen(url)
-    return jsondata
     jsondata=json.loads(response.read())
+    return jsondata
