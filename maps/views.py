@@ -14,38 +14,46 @@ def farmertable(request):
     url="https://10.0.3.23:8787/farmer/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
+    return jsondata
     
 def farmtable(request):
     url="https://10.0.3.23:8787/farm/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
+    return jsondata
     
 def housetable(request):
     url="https://10.0.3.23:8787/house/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
+    return jsondata
     
 def members(request):
     url="https://10.0.3.23:8787/members/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
+    return jsondata
     
 def farmpoints(request):
     url="https://10.0.3.23:8787/farmpoints/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
+    return jsondata
     
 def crop(request):
     url="https://10.0.3.23:8787/crop/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
+    return jsondata
     
 def wells(request):
     url="https://10.0.3.23:8787/wells/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
+    return jsondata
     
 def publicplaces(request):
     url="https://10.0.3.23:8787/publicplaces/?format=json"
     response=urllib.urlopen(url)
+    return jsondata
     jsondata=json.loads(response.read())
