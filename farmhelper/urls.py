@@ -21,7 +21,14 @@ from maps import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^maps/', include('maps.urls')),
-    url(r'^house/', views.HouseList.as_view()),
+    url(r'^house/', views.housetable, name= 'housetable'),
+    url(r'^farmer/',views.farmertable, name= 'farmertable'),
+    url(r'^farm/',views.farmtable, name= 'farmtable'),
+    url(r'^farmpoints/',views.farmpointstable, name= 'farmpointstable'),
+    url(r'^wells/',views.wellstable, name= 'wellstable'),
+    url(r'^publicplaces/',views.publicplacestable, name= 'publicplacestable'),
+    url(r'^members/',views.memberstable, name= 'memberstable'),
+    url(r'^crop/',views.croptable, name= 'croptable'),
 ]
 
 urlpatterns=format_suffix_patterns(urlpatterns)
