@@ -25,7 +25,7 @@ SECRET_KEY = 'gdzapwk%^&n$$_(wnd(!kuz0=ammw)6km@t7)y4=1xz$7y)ea%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'maps',
+    'rest_framework',
+    'rest_framework_gis',
 ]
 
 MIDDLEWARE = [
