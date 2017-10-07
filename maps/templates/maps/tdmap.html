@@ -174,7 +174,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 			var stat="in use";
 		}
 		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},"Vardaiahpalem",t,0])
-    console.log({{i.Poi.coordinates.0|safe}});
+    
      {% endfor %}
     
     {% for i in farmer %}
@@ -211,7 +211,7 @@ google.load("visualization", "1", {packages:["corechart"]});
      {% endfor %}
 		{% endfor %}
     
-    console.log(locations);
+   
     /////////////////////////////////////////////////////////////////////////////
     
    //var locations = [
@@ -289,8 +289,9 @@ google.load("visualization", "1", {packages:["corechart"]});
             markers.push(marker); 
         }
 	    
-	    //farms--------------------------
+	    //wells--------------------------
         else{
+		console.log(locations[i][1],locations[i][2]);
         	marker = new google.maps.Marker({
         	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
@@ -298,7 +299,7 @@ google.load("visualization", "1", {packages:["corechart"]});
           });
         	marker.type="2";
         	marker.locate=locations[i][3];
-        markers.push(marker);
+       		markers.push(marker);
         }
         
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
