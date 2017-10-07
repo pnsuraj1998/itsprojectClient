@@ -148,11 +148,11 @@ google.load("visualization", "1", {packages:["corechart"]});
 
     /////////////////////////////////////////////////////////////////////////////
     {% for i in farmer %}
-	var farmerid={{i.id}};
+	var farmerid={{i.id|safe}};
 	var farmername="{{i.Name|safe}}";
     var farmernumber="{{i.Number|safe}}"
 	{% for j in house %}
-		var t=0;
+		var t=1;
 		var Vil="Vardaiahpalem";
        
 		locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,5]);
@@ -191,7 +191,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 					if(faid==farmid){
 					var Vil="Amruthalur";
 					var earning={{j.Income}}
-					var t=1;
+					var t=0;
 						l.push({ lat: {{pts.Lat|safe}}, lng: {{pts.Lon|safe}} });
 						locations.push([farmername, 70.00,54.654,Vil,t,earning]);
 					}
