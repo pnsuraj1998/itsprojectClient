@@ -155,7 +155,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		var t=0;
 		var Vil={{j.Village}};
        
-		locations.push([farmername,{{j.Lat}},{{j.Lon}},Vil,t]);
+		locations.push([farmername,{{j.Poi.coordinates[0]}},{{j.Poi.coordinates[1]}},Vil,t]);
 	{% endfor %}
     {% endfor %}
     
@@ -172,7 +172,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		{
 			var stat="in use";
 		}
-		locations.push([stat,{{i.Lan}},{{i.Lon}},"Amruthalur",t])
+		locations.push([stat,{{i.Poi.coordinates[0]}},{{i.Poi.coordinates[1]}},"Amruthalur",t])
      {% endfor %}
     
     {% for i in farmer %}
