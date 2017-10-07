@@ -126,7 +126,7 @@
 google.load("visualization", "1", {packages:["corechart"]});
 	var markers=[]
 	var poly=[]
-    var locations=[];	
+    	var locations=[];	
     
 	var farmdata="{{farm}}";
 //	document.write(farmdata);
@@ -155,7 +155,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		var t=0;
 		var Vil={{j.Village}};
        
-		locations.push([farmername,{{j.Poi.coordinates.0}},{{j.Poi.coordinates.1}},Vil,t]);
+		locations.push([farmername,{{j.Poi.coordinates.0}},{{j.Poi.coordinates.1}},Vil,t,5]);
 	{% endfor %}
     {% endfor %}
     
@@ -237,7 +237,7 @@ google.load("visualization", "1", {packages:["corechart"]});
           });
         	marker.type="0";
         	marker.locate=locations[i][3];
-        markers.push(marker);
+        	markers.push(marker);
         
         }
 	 //for houses---------------------   
