@@ -16,7 +16,7 @@ def farmertable(request):
     url="https://10.0.3.23:8787/farmer/?format=json"
     response=urllib2.urlopen(url)
     data = response.read()
-	return HttpResponse(data)
+    return HttpResponse(data)
     
 def farmtable(request):
     url="https://10.0.3.23:8787/farm/?format=json"
