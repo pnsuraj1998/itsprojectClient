@@ -29,37 +29,37 @@ def housetable(request):
     url="http://10.0.3.23:8787/house/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
-    return jsondata
+    return JsonResponse(jsondata,safe=False)
     
 def memberstable(request):
     url="http://10.0.3.23:8787/members/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
-    return jsondata
+    return JsonResponse(jsondata,safe=False)
     
 def farmpointstable(request):
     url="http://10.0.3.23:8787/farmpoints/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
-    return jsondata
+    return JsonResponse(jsondata, safe=False)
     
 def croptable(request):
     url="http://10.0.3.23:8787/crop/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
-    return jsondata
+    return JsonResponse(jsondata, safe=False)
     
 def wellstable(request):
     url="http://10.0.3.23:8787/wells/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
-    return jsondata
+    return JsonResponse(jsondata, safe=False)
     
 def publicplacestable(request):
     url="http://10.0.3.23:8787/publicplaces/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
-    return jsondata
+    return JsonResponse(jsondata, safe=False)
 
 def mappoints(request):
     url="http://10.0.3.23:8787/farmer/?format=json"
