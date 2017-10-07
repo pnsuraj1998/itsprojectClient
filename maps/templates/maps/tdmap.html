@@ -152,7 +152,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 	var farmername="{{i.Name}}";
 	{% for j in house %}
 		var t=0;
-		var Vil="Amruthalur";
+		var Vil={{;
 		locations.push([farmername,{{j.Lat}},{{j.Lon}},Vil,t]);
 	{% endfor %}
     {% endfor %}
@@ -224,6 +224,7 @@ google.load("visualization", "1", {packages:["corechart"]});
     var choice=0
     for (i = 0; i < locations.length; i++) 
     {  
+	    //for farms
         if (locations[i][4]==0)
         {
 
@@ -237,52 +238,54 @@ google.load("visualization", "1", {packages:["corechart"]});
         markers.push(marker);
         
         }
-        else if (locations[i][4]==1)
+	 //for houses---------------------   
+	 else if (locations[i][4]==1)
         {
             var icon1 = {
-                url: "https://maxcdn.icons8.com/Share/icon/ultraviolet/Animals//dog_house1600.png", // url
-                scaledSize: new google.maps.Size(10, 10), // scaled size
+                url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png", // url
+                scaledSize: new google.maps.Size(20, 20), // scaled size
                  origin: new google.maps.Point(0,0), // origin
                  anchor: new google.maps.Point(0, 0) // anchor
               };
         var icon2 = {
-               url: "https://maxcdn.icons8.com/Share/icon/ultraviolet/Animals//dog_house1600.png", // url
-               scaledSize: new google.maps.Size(20, 20), // scaled size
+               url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png", // url
+               scaledSize: new google.maps.Size(30, 30), // scaled size
                  origin: new google.maps.Point(0,0), // origin
                  anchor: new google.maps.Point(0, 0) // anchor
           };
         var icon3 = {
-                   url: "https://maxcdn.icons8.com/Share/icon/ultraviolet/Animals//dog_house1600.png", // url
+                   url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png", // url
                    scaledSize: new google.maps.Size(40, 40), // scaled size
                     origin: new google.maps.Point(0,0), // origin
                    anchor: new google.maps.Point(0, 0) // anchor
               };
           if (locations[i][5]<=5){
-        	marker = new google.maps.Marker({
-        	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon1,
          map: map
           });
         }
-         if (locations[i][5]>=5 && locations[i][5]<=10){
+         else if (locations[i][5]>5 && locations[i][5]<=10){
           marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon2,
          map: map
           });
         }
-         if (locations[i][5]>=10 && locations[i][5]<=15){
+         else if (locations[i][5]>10 && locations[i][5]<=15){
           marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon3,
          map: map
           });
         }
-        	marker.type="1";
-        	marker.locate=locations[i][3];
-        	markers.push(marker);
-        	
+            marker.type="1";
+            marker.locate=locations[i][3];
+            markers.push(marker); 
         }
+	    
+	    //farms--------------------------
         else{
         	marker = new google.maps.Marker({
         	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
