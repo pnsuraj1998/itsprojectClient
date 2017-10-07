@@ -13,7 +13,7 @@ def index(request):
     return HttpResponse('<h2>The Index of Myapp..</h2>')
     
 def farmertable(request):
-    url="https://10.0.3.23:8787/farmer/?format=json"
+    url="http://10.0.3.23:8787/farmer/?format=json"
     response=urllib.urlopen(url)
     jsondata = json.loads(response.read())
     return render(request, 'tdmap.html', {'farmer':jsondata})
