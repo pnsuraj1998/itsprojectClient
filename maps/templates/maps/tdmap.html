@@ -165,6 +165,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		var t=2;
 		var status=1;
 		//var status={{i.working}};
+        var Vil="{{i.Village}}"
 		if(status==0)
 		{
 			var stat="not in use";
@@ -173,7 +174,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		{
 			var stat="in use";
 		}
-		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},"Vardaiahpalem",t,0])
+		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},Vil,t,0])
     
      {% endfor %}
     
@@ -184,17 +185,20 @@ google.load("visualization", "1", {packages:["corechart"]});
 		{% for j in farm %}
 			var l=[]
 			var fid={{j.F_id}};		
-			if (fid==farmerid){				
+			if (fid==farmerid)
+            {				
 				var farmid={{j.id}};
 
-				{% for pts in point %}
+				{% for pts in farmpoints %}
 					var faid={{pts.Farm_id}};
 					if(faid==farmid){
-					var Vil="Amruthalur";
+					var Vil="{{j.Village}}";
 					var earning={{j.Income}}
 					var t=0;
-						l.push({ lat: {{pts.Lat|safe}}, lng: {{pts.Lon|safe}} });
-						locations.push([farmername, 70.00,54.654,Vil,t,earning]);
+      {% for ite in pts.Polygon.coordinates %}
+            locations.push([farmername,{{ite.1|safe}},{{ite.0|safe}},"Vard",t,0])
+       {% endfor %}
+      
 					}
      		{% endfor %}
 
