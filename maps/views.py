@@ -17,13 +17,13 @@ def farmertable(request):
     url="http://10.0.3.23:8787/farmer/?format=json"
     response=urllib.urlopen(url)
     jsondata = json.loads(response.read())
-    return jsondata
+    return JsonResponse(jsondata, safe=False)
     
 def farmtable(request):
     url="http://10.0.3.23:8787/farm/?format=json"
     response=urllib.urlopen(url)
     jsondata= json.loads(response.read())
-    return JsonResponse(jsondata)
+    return JsonResponse(jsondata, safe=False)
     
 def housetable(request):
     url="http://10.0.3.23:8787/house/?format=json"
