@@ -1,3 +1,83 @@
+	var farmdata="{{farms}}";
+//	document.write(farmdata);
+
+	var farmerdata="{{farmers}}";
+//	document.write(farmdata);
+	
+	var pointdata="{{points}}";
+	//document.write(farmdata);
+
+	var housedata="{{houses}}";
+
+	var welldata="{{wells}}";
+    
+	{% for i in farmers %}
+		var farmerid={{i.id}};
+		var farmername="{{i.Name}}";
+		{% for j in houses %}
+			var t=0;
+			var Vil="Amruthalur";
+			locations.push([farmername,{{j.Lat}},{{j.Lon}},Vil,t]);
+		{% endfor %}
+	{% endfor %}
+
+	{% for i in wells %}
+		var wellid={{i.id}};
+		var t=2;
+		var status=1;
+		//var status={{i.working}};
+		if(status==0)
+		{
+			var stat="not in use";
+		}
+		else
+		{
+			var stat="in use";
+		}
+		locations.push([stat,{{i.Lan}},{{i.Lon}},"Amruthalur",t])
+	{% endfor %}
+
+	{% for i in farmers %}
+		var farmerid={{i.id}};
+		var farmername="{{i.Name}}";
+
+		{% for j in farms %}
+			var l=[]
+			var fid={{j.F_id}};		
+			if (fid==farmerid){				
+				var farmid={{j.id}};
+
+				{% for pts in points %}
+					var faid={{pts.Farm_id}};
+					if(faid==farmid){
+					var Vil="Amruthalur";
+					var earning={{j.Income}}
+					var t=1;
+						l.push({ lat: {{pts.Lat}}, lng: {{pts.Lon}} });
+						locations.push([farmername, {{pts.Lat}}, {{pts.Lon}},Vil,t,earning]);
+					}
+				{% endfor %}
+
+						var flightPath0 = new google.maps.Polygon({
+						    path:l,
+						    strokeColor: "#0000FF",
+						    strokeOpacity: 0.8,
+   							strokeWeight: 2,
+						    fillColor: "#0000FF",
+				    		fillOpacity: 0.05
+ 						 });
+					  flightPath0.setMap(map);
+				}
+		{% endfor %}
+	{% endfor %}
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,12 +207,89 @@ google.load("visualization", "1", {packages:["corechart"]});
 	var markers=[]
 	var poly=[]
     var locations=[];	
-    var map = new google.maps.Map(document.getElementById('map'), {
+    
+	var farmdata="{{farm}}";
+//	document.write(farmdata);
+
+	var farmerdata="{{farmer}}";
+//	document.write(farmdata);
+	
+	var pointdata="{{points}}";
+	//document.write(farmdata);
+
+	var housedata="{{house}}";
+
+	var welldata="{{well}}";
+	var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 14,
       center: new google.maps.LatLng(-33.890542, 151.274856),
       mapTypeId: google.maps.MapTypeId.HYBRID
     });
 
+    /////////////////////////////////////////////////////////////////////////////
+    {% for i in farmer %}
+		var farmerid={{i.id}};
+		var farmername="{{i.Name}}";
+		{% for j in house %}
+			var t=0;
+			var Vil="Amruthalur";
+			locations.push([farmername,{{j.Lat}},{{j.Lon}},Vil,t]);
+		{% endfor %}
+	{% endfor %}
+    
+    {% for i in well %}
+		var wellid={{i.id}};
+		var t=2;
+		var status=1;
+		//var status={{i.working}};
+		if(status==0)
+		{
+			var stat="not in use";
+		}
+		else
+		{
+			var stat="in use";
+		}
+		locations.push([stat,{{i.Lan}},{{i.Lon}},"Amruthalur",t])
+	{% endfor %}
+    
+    {% for i in farmer %}
+		var farmerid={{i.id}};
+		var farmername="{{i.Name}}";
+
+		{% for j in farm %}
+			var l=[]
+			var fid={{j.F_id}};		
+			if (fid==farmerid){				
+				var farmid={{j.id}};
+
+				{% for pts in point %}
+					var faid={{pts.Farm_id}};
+					if(faid==farmid){
+					var Vil="Amruthalur";
+					var earning={{j.Income}}
+					var t=1;
+						l.push({ lat: {{pts.Lat}}, lng: {{pts.Lon}} });
+						locations.push([farmername, {{pts.Lat}}, {{pts.Lon}},Vil,t,earning]);
+					}
+				{% endfor %}
+
+						var flightPath0 = new google.maps.Polygon({
+						    path:l,
+						    strokeColor: "#0000FF",
+						    strokeOpacity: 0.8,
+   							strokeWeight: 2,
+						    fillColor: "#0000FF",
+				    		fillOpacity: 0.05
+ 						 });
+					  flightPath0.setMap(map);
+				}
+		{% endfor %}
+	{% endfor %}
+    
+    
+    /////////////////////////////////////////////////////////////////////////////
+    
    var locations = [
       ['Bondi Beach', -33.890542, 151.274856, 'Amarthalur',0],
       ['Coogee Beach', -33.923036, 151.259052, 'Amarthalur',1,5],
@@ -227,6 +384,13 @@ google.load("visualization", "1", {packages:["corechart"]});
           	else if(locations[i][4]==0)
           	{
           		cnt=locations[i][0]+","+locations[i][3];
+                var modal = document.getElementById('myModal');
+
+            // Get the button that opens the modal
+            //var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
           	}
 
           	else if(locations[i][4]==2)
@@ -237,13 +401,7 @@ google.load("visualization", "1", {packages:["corechart"]});
             map.setCenter(marker.getPosition());
             infowindow.setContent(cnt);
             infowindow.open(map, marker);
-            var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-            //var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
+            
 
 // When the user clicks the button, open the modal 
 
