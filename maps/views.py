@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import HttpResponse
 from .models import *
-import urllib, json
+import urllib2, json
 import requests
 # Create your views here.
 
@@ -14,7 +14,7 @@ def index(request):
     
 def farmertable(request):
     url="https://10.0.3.23:8787/farmer/?format=json"
-    response=urllib.urlopen(url)
+    response=urllib2.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
