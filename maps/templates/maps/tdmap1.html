@@ -111,7 +111,7 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
 
-	console.log({{farmer.Name}});
+	
 google.load("visualization", "1", {packages:["corechart"]});
 	var markers=[]
 	var poly=[]
@@ -121,6 +121,9 @@ google.load("visualization", "1", {packages:["corechart"]});
 //	document.write(farmdata);
 	var farmerdata="{{farmer}}";
 //	document.write(farmdata);
+	
+	
+	console.log(farmerdata.Name);
 	
 	var farmpointsdata="{{farmpoints}}";
 	//document.write(farmdata);
