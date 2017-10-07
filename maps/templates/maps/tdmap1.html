@@ -208,6 +208,13 @@ google.load("visualization", "1", {packages:["corechart"]});
 //];
 console.log(locations.length);
 		 console.log(locations);
+		 
+{% for i in farmer %}
+	var farmerid={{i.id|safe}};
+	var farmername="{{i.Name|safe}}";
+   	var farmernumber="{{i.Number|safe}}"
+	var farmerimg="{{i.Photo|safe}}"
+	{% endfor %}
     var infowindow = new google.maps.InfoWindow();
     var marker, i;
     var choice=0
