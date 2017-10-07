@@ -142,7 +142,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 	var welldata="{{well}}";
 	var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 4,
-      center: new google.maps.LatLng(80.890542, 58.274856),
+      center: new google.maps.LatLng(13.890542, 78.274856),
       mapTypeId: google.maps.MapTypeId.HYBRID
     });
 
@@ -155,7 +155,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		var t=0;
 		var Vil="Vardaiahpalem";
        
-		locations.push([farmername,{{j.Poi.coordinates[0]}},{{j.Poi.coordinates[1]}},Vil,t,5]);
+		locations.push([farmername,{{j.Poi.coordinates.0}},{{j.Poi.coordinates.1}},Vil,t,5]);
 	{% endfor %}
     {% endfor %}
     
