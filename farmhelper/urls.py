@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^allmembers/',views.memberstable, name= 'members'),
     url(r'^allcrop/',views.croptable, name= 'crop'),
     url(r'^maps/',views.mappoints,name='mappoints'),
+    url(r'^dupmaps/',views.mappoints1,name='mappoints1'),
 ]
 
 urlpatterns=format_suffix_patterns(urlpatterns)
