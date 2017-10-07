@@ -173,6 +173,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 			var stat="in use";
 		}
 		locations.push([stat,{{i.Poi.coordinates.0}},{{i.Poi.coordinates.1}},"Vardaiahpalem",t])
+    console.log({{i.Poi.coordinates.0}});
      {% endfor %}
     
     {% for i in farmer %}
