@@ -9,6 +9,9 @@ import urllib, json
 import requests
 # Create your views here.
 
+def index(request):
+    return HttpResponse('<h2>The Index of Myapp..</h2>')
+    
 def farmertable(request):
     url="https://10.0.3.23:8787/farmer/?format=json"
     response=urllib.urlopen(url)
