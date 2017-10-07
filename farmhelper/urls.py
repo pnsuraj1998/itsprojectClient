@@ -21,14 +21,14 @@ from maps import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^allmaps/', include('maps.urls')),
-    url(r'^allhouse/', views.house, name= 'house'),
-    url(r'^allfarmer/',views.farmer, name= 'farmer'),
-    url(r'^allfarm/',views.farm, name= 'farm'),
-    url(r'^allfarmpoints/',views.farmpoints, name= 'farmpoints'),
-    url(r'^allwells/',views.wells, name= 'wells'),
-    url(r'^allpublicplaces/',views.publicplaces, name= 'publicplaces'),
-    url(r'^allmembers/',views.members, name= 'members'),
-    url(r'^allcrop/',views.crop, name= 'crop'),
+    url(r'^allhouse/', views.housetable, name= 'house'),
+    url(r'^allfarmer/',views.farmertable, name= 'farmer'),
+    url(r'^allfarm/',views.farmtable, name= 'farm'),
+    url(r'^allfarmpoints/',views.farmpointstable, name= 'farmpoints'),
+    url(r'^allwells/',views.wellstable, name= 'wells'),
+    url(r'^allpublicplaces/',views.publicplacestable, name= 'publicplaces'),
+    url(r'^allmembers/',views.memberstable, name= 'members'),
+    url(r'^allcrop/',views.croptable, name= 'crop'),
 ]
 
 urlpatterns=format_suffix_patterns(urlpatterns)
