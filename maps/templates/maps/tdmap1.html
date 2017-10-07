@@ -1,1 +1,414 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Farm Helper</title> 
+  <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript">
+  </script>
+<style>
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+}
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+.button2:hover {
+    background-color: #008CBA;
+    color: white;
+}
+.button3 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #f44336;
+}
+.button3:hover {
+    background-color: #f44336;
+    color: white;
+}
+.button4 {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+}
+.button4:hover {background-color: #e7e7e7;}
+.button5 {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+.button5:hover {
+    background-color: #555555;
+    color: white;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 5px;
+    border: 1px solid #888;
+    width: 25%;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+<center>
+  <div id="map" style="width:50%;height:500px"></div>
+</center>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script>
+google.load("visualization", "1", {packages:["corechart"]});
+	var markers=[]
+	var poly=[]
+    	var locations=[];	
+    
+	var farmdata="{{farm}}";
+//	document.write(farmdata);
+	var farmerdata="{{farmer}}";
+//	document.write(farmdata);
+	
+	var farmpointsdata="{{farmpoints}}";
+	//document.write(farmdata);
+	var housedata="{{house}}";
+	var welldata="{{wells}}";
+	var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: new google.maps.LatLng(13.890542, 78.274856),
+      mapTypeId: google.maps.MapTypeId.HYBRID
+    });
+    /////////////////////////////////////////////////////////////////////////////
+    {% for i in farmer %}
+	var farmerid={{i.id|safe}};
+	var farmername="{{i.Name|safe}}";
+   	var farmernumber="{{i.Number|safe}}"
+	
+	{% for j in house %}
+		var t=1;
+		var Vil="{{j.Village}}";
+       
+		locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}}]);
+	{% endfor %}
+    {% endfor %}
+    
+    {% for i in wells %}
+		var wellid={{i.id|safe}};
+		var t=2;
+		var status=1;
+		//var status={{i.working}};
+		if(status==0)
+		{
+			var stat="not in use";
+		}
+		else
+		{
+			var stat="in use";
+		}
+		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},"Vardaiahpalem",t,0])
+    
+     {% endfor %}
+    
+    {% for i in farmer %}
+		var farmerid={{i.id|safe}};
+		var farmername="{{i.Name|safe}}";
+		{% for j in farm %}
+			var l=[]
+			var fid={{j.F_id}};		
+			if (fid==farmerid){				
+				var farmid={{j.id}};
+				{% for pts in point %}
+					var faid={{pts.Farm_id}};
+					if(faid==farmid){
+					var Vil="Amruthalur";
+					var earning={{j.Income}}
+					var t=0;
+						l.push({ lat: {{pts.Lat|safe}}, lng: {{pts.Lon|safe}} });
+						locations.push([farmername, 70.00,54.654,Vil,t,earning]);
+					}
+     		{% endfor %}
+						var flightPath0 = new google.maps.Polygon({
+						    path:l,
+						    strokeColor: "#0000FF",
+						    strokeOpacity: 0.8,
+   							strokeWeight: 2,
+						    fillColor: "#0000FF",
+				    		fillOpacity: 0.05
+ 						 });
+					  flightPath0.setMap(map);
+				}
+     {% endfor %}
+		{% endfor %}
+    
+   
+    /////////////////////////////////////////////////////////////////////////////
+    
+   //var locations = [
+  //    ['Bondi Beach', -33.890542, 151.274856, 'Amarthalur',0],
+   //   ['Coogee Beach', -33.923036, 151.259052, 'Amarthalur',1,5],
+   //   ['Cronulla Beach', -34.028249, 151.157507, 'Govada',1,10],
+   //   ['Manly Beach', -33.80010128657071, 151.28747820854187,'Govada',2],
+    //  ['Maroubra Beach', -33.950198, 151.259302, 'Govada',1,15]
+//];
+console.log(locations.length);
+		 console.log(locations);
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    var choice=0
+    for (i = 0; i < locations.length; i++) 
+    {  
+	    //for farms
+        if (locations[i][4]==0)
+        {
+        	marker = new google.maps.Marker({
+        	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         icon:'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+         map: map
+          });
+        	marker.type="0";
+        	marker.locate=locations[i][3];
+        	markers.push(marker);
+        
+        }
+	 //for houses---------------------   
+	 else if (locations[i][4]==1)
+        {
+            var icon1 = {
+                url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png", // url
+                scaledSize: new google.maps.Size(20, 20), // scaled size
+                 origin: new google.maps.Point(0,0), // origin
+                 anchor: new google.maps.Point(0, 0) // anchor
+              };
+        var icon2 = {
+               url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png", // url
+               scaledSize: new google.maps.Size(30, 30), // scaled size
+                 origin: new google.maps.Point(0,0), // origin
+                 anchor: new google.maps.Point(0, 0) // anchor
+          };
+        var icon3 = {
+                   url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png", // url
+                   scaledSize: new google.maps.Size(40, 40), // scaled size
+                    origin: new google.maps.Point(0,0), // origin
+                   anchor: new google.maps.Point(0, 0) // anchor
+              };
+          if (locations[i][5]<=5){
+            marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         icon:icon1,
+         map: map
+          });
+        }
+         else if (locations[i][5]>5 && locations[i][5]<=10){
+          marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         icon:icon2,
+         map: map
+          });
+        }
+         else if (locations[i][5]>10 && locations[i][5]<=15){
+          marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         icon:icon3,
+         map: map
+          });
+        }
+            marker.type="1";
+            marker.locate=locations[i][3];
+            markers.push(marker); 
+        }
+	    
+	    //wells--------------------------
+        else{
+		console.log(locations[i][2]);
+        	marker = new google.maps.Marker({
+        	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+         map: map
+          });
+        	marker.type="2";
+        	marker.locate=locations[i][3];
+       		markers.push(marker);
+        }
+        
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+        	if(locations[i][4]==1)
+        	{
+        		cnt=locations[i][0]+","+locations[i][3]+ "\n No of persons: "+locations[i][5];
+          	}
+          	else if(locations[i][4]==0)
+          	{
+          		cnt=locations[i][0]+","+locations[i][3];
+                var modal = document.getElementById('myModal');
+            // Get the button that opens the modal
+            //var btn = document.getElementById("myBtn");
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+          	}
+          	else if(locations[i][4]==2)
+          	{
+          		cnt=locations[i][0];
+          	}
+            map.setZoom(19);
+            map.setCenter(marker.getPosition());
+            infowindow.setContent(cnt);
+            infowindow.open(map, marker);
+            
+// When the user clicks the button, open the modal 
+            modal.style.display = "block";
+            drawChart();
+     
+// When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+            modal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+            if (event.target == modal) {
+            modal.style.display = "none";
+             }
+            }
+        }
+      })(marker, i));
+      filterMarkers = function (category) {
+      	if (category=="3"){
+      		for (i=0;i<markers.length;i++){
+      			markers[i].setVisible(true);
+      		}
+      	}
+      	else{
+      		 for (i = 0; i < markers.length; i++) {
+        
+        // If is same category or category not picked
+        		if(markers[i].type==category){
+            		markers[i].setVisible(true);
+        		}
+        // Categories don't match 
+        		else {
+            		markers[i].setVisible(false);
+        		}
+    		}
+      	}
+   
+    }
+      filterMarkers1 = function (category) {
+      	if (category=="3"){
+      		for (i=0;i<markers.length;i++){
+      			markers[i].setVisible(true);
+      		}
+      	}
+      	else{
+      		 for (i = 0; i < markers.length; i++) {
+        
+        // If is same category or category not picked
+        		if(markers[i].locate==category){
+            		markers[i].setVisible(true);
+        		}
+        // Categories don't match 
+        		else {
+            		markers[i].setVisible(false);
+        		}
+    		}
+      	}
+    }
+ }
+ function drawChart() {
+  
+        var a='Task';
+        var data = google.visualization.arrayToDataTable([
+          ['Crop', 'Percentage'],
+          [a,     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
+        var options = {
+          title: 'Cropping'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+</script>
+<br>
+<center>
+
+
+<select id="type" onchange="filterMarkers1(this.value);">
+
+    <option value="">Please select Village</option>
+    <option value="3">All</option>
+    <option value="Amruthalur">Amruthalur</option>
+    <option value="Govada">Govada</option></select>
+<br><br><br>
+<button class="button button3" onclick="filterMarkers('1');">Houses</button>
+<button class="button button1" onclick="filterMarkers('0');">Farms</button>
+<button class="button button2" onclick="filterMarkers('2');">Wells</button>
+<button class="button button5" onclick="filterMarkers('3');">See All</button>	</center>
+<p id="test"></p>
+<!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div id="chart_div" style="height: 300px; width: 300px;">
+<span class="close">&times;</span>
+  </div>
+
+</div>
+</body>
+</html>
