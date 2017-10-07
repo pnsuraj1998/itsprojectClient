@@ -28,31 +28,31 @@ def housetable(request):
     jsondata=json.loads(response.read())
     return jsondata
     
-def members(request):
+def memberstable(request):
     url="https://10.0.3.23:8787/members/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def farmpoints(request):
+def farmpointstable(request):
     url="https://10.0.3.23:8787/farmpoints/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def crop(request):
+def croptable(request):
     url="https://10.0.3.23:8787/crop/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def wells(request):
+def wellstable(request):
     url="https://10.0.3.23:8787/wells/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def publicplaces(request):
+def publicplacestable(request):
     url="https://10.0.3.23:8787/publicplaces/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
