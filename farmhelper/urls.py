@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^allmaps/', include('maps.urls')),
     url(r'^allhouse/', views.housetable, name= 'housetable'),
-    url(r'^allfarmer/',views.farmertable, name= 'farmertable'),
+    url(r'^allfarmer/',views.farmertable, name= 'farmer'),
     url(r'^allfarm/',views.farmtable, name= 'farmtable'),
     url(r'^allfarmpoints/',views.farmpointstable, name= 'farmpointstable'),
     url(r'^allwells/',views.wellstable, name= 'wellstable'),
