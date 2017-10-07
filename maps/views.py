@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.http import JsonResponse
 from django.http import HttpResponse
 from .models import *
 import urllib, json
@@ -22,7 +23,7 @@ def farmtable(request):
     url="http://10.0.3.23:8787/farm/?format=json"
     response=urllib.urlopen(url)
     jsondata= json.loads(response.read())
-    return jsondata
+    return JsonResponse(jsondata)
     
 def housetable(request):
     url="http://10.0.3.23:8787/house/?format=json"
