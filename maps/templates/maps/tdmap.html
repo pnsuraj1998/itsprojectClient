@@ -73,102 +73,73 @@
     background-color: #555555;
     color: white;
 }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 5px;
+    border: 1px solid #888;
+    width: 25%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 </style>
 
 </head>
 <body>
 <center>
-	<div id="map" style="width:50%;height:500px"></div>
+  <div id="map" style="width:50%;height:500px"></div>
 </center>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
 
-
+google.load("visualization", "1", {packages:["corechart"]});
 	var markers=[]
 	var poly=[]
-    var locations=[];
-
-	var farmdata="{{farm}}";
-//	document.write(farmdata);
-
-	var farmerdata="{{farmer}}";
-//	document.write(farmdata);
-	
-	var pointdata="{{farmpoints}}";
-	//document.write(farmdata);
-
-	var housedata="{{house}}";
-
-	var welldata="{{wells}}";
-    
+    var locations=[];	
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 14,
-      center: new google.maps.LatLng(16.113828, 80.658900),
+      center: new google.maps.LatLng(-33.890542, 151.274856),
       mapTypeId: google.maps.MapTypeId.HYBRID
     });
 
-
-	{% for i in farmers %}
-		var farmerid={{i.id}};
-		var farmername="{{i.Name}}";
-		{% for j in houses %}
-			var t=0;
-			var Vil="Amruthalur";
-			locations.push([farmername,{{j.Lat}},{{j.Lon}},Vil,t]);
-		{% endfor %}
-	{% endfor %}
-
-	{% for i in wells %}
-		var wellid={{i.id}};
-		var t=2;
-		var status=1;
-		//var status={{i.working}};
-		if(status==0)
-		{
-			var stat="not in use";
-		}
-		else
-		{
-			var stat="in use";
-		}
-		locations.push([stat,{{i.Lan}},{{i.Lon}},"Amruthalur",t])
-	{% endfor %}
-
-	{% for i in farmers %}
-		var farmerid={{i.id}};
-		var farmername="{{i.Name}}";
-
-		{% for j in farms %}
-			var l=[]
-			var fid={{j.F_id}};		
-			if (fid==farmerid){				
-				var farmid={{j.id}};
-
-				{% for pts in points %}
-					var faid={{pts.Farm_id}};
-					if(faid==farmid){
-					var Vil="Amruthalur";
-					var earning={{j.Income}}
-					var t=1;
-						l.push({ lat: {{pts.Lat}}, lng: {{pts.Lon}} });
-						locations.push([farmername, {{pts.Lat}}, {{pts.Lon}},Vil,t,earning]);
-					}
-				{% endfor %}
-
-						var flightPath0 = new google.maps.Polygon({
-						    path:l,
-						    strokeColor: "#0000FF",
-						    strokeOpacity: 0.8,
-   							strokeWeight: 2,
-						    fillColor: "#0000FF",
-				    		fillOpacity: 0.05
- 						 });
-					  flightPath0.setMap(map);
-				}
-		{% endfor %}
-	{% endfor %}
-
-
-
+   var locations = [
+      ['Bondi Beach', -33.890542, 151.274856, 'Amarthalur',0],
+      ['Coogee Beach', -33.923036, 151.259052, 'Amarthalur',1,5],
+      ['Cronulla Beach', -34.028249, 151.157507, 'Govada',1,10],
+      ['Manly Beach', -33.80010128657071, 151.28747820854187,'Govada',2],
+      ['Maroubra Beach', -33.950198, 151.259302, 'Govada',1,15]
+];
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -178,6 +149,7 @@
     {  
         if (locations[i][4]==0)
         {
+
         	marker = new google.maps.Marker({
         	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
@@ -190,11 +162,45 @@
         }
         else if (locations[i][4]==1)
         {
+            var icon1 = {
+                url: "https://maxcdn.icons8.com/Share/icon/ultraviolet/Animals//dog_house1600.png", // url
+                scaledSize: new google.maps.Size(10, 10), // scaled size
+                 origin: new google.maps.Point(0,0), // origin
+                 anchor: new google.maps.Point(0, 0) // anchor
+              };
+        var icon2 = {
+               url: "https://maxcdn.icons8.com/Share/icon/ultraviolet/Animals//dog_house1600.png", // url
+               scaledSize: new google.maps.Size(20, 20), // scaled size
+                 origin: new google.maps.Point(0,0), // origin
+                 anchor: new google.maps.Point(0, 0) // anchor
+          };
+        var icon3 = {
+                   url: "https://maxcdn.icons8.com/Share/icon/ultraviolet/Animals//dog_house1600.png", // url
+                   scaledSize: new google.maps.Size(40, 40), // scaled size
+                    origin: new google.maps.Point(0,0), // origin
+                   anchor: new google.maps.Point(0, 0) // anchor
+              };
+          if (locations[i][5]<=5){
         	marker = new google.maps.Marker({
         	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-         icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+         icon:icon1,
          map: map
           });
+        }
+         if (locations[i][5]>=5 && locations[i][5]<=10){
+          marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         icon:icon2,
+         map: map
+          });
+        }
+         if (locations[i][5]>=10 && locations[i][5]<=15){
+          marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+         icon:icon3,
+         map: map
+          });
+        }
         	marker.type="1";
         	marker.locate=locations[i][3];
         	markers.push(marker);
@@ -227,10 +233,35 @@
           	{
           		cnt=locations[i][0];
           	}
-          infowindow.setContent(cnt);
-          infowindow.open(map, marker);
-      map.setZoom(19);
-  map.setCenter(marker.getPosition());
+            map.setZoom(19);
+            map.setCenter(marker.getPosition());
+            infowindow.setContent(cnt);
+            infowindow.open(map, marker);
+            var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+            //var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+
+            modal.style.display = "block";
+            drawChart();
+
+     
+// When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+            modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+            if (event.target == modal) {
+            modal.style.display = "none";
+             }
+            }
         }
       })(marker, i));
       filterMarkers = function (category) {
@@ -275,60 +306,32 @@
         		}
     		}
       	}
-   
     }
+ }
+ function drawChart() {
+  
+        var a='Task';
+        var data = google.visualization.arrayToDataTable([
+          ['Crop', 'Percentage'],
+          [a,     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
 
-    plotfarm= function(poly)
-    {
-    	var flightPath=new google.maps.Polygon({
-    		path:poly,
-    		strokeColor: "#0000FF",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#0000FF",
-    fillOpacity: 0.05
-    	});
-    	flightPath.setMap(map);
-    }
-    
-     var poly = [
-    
-    {lat: 16.111434, lng: 80.651570},
-    {lat: 16.112465, lng: 80.651710},
-    {lat: 16.112521, lng: 80.650680},
-    {lat: 16.111532, lng: 80.650556}
-  ];
-    var poly1 = [
-    
-    {lat: 16.097221, lng: 80.650172},
-    {lat: 16.098012, lng: 80.650494},
-    {lat: 16.097767, lng: 80.651296},
-    {lat: 16.096950, lng: 80.650990}
-  ];
-      var flightPath = new google.maps.Polygon({
-    path:poly[0],
-    strokeColor: "#0000FF",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#0000FF",
-    fillOpacity: 0.05
-  });
-  flightPath.setMap(map);
-     var flightPath1 = new google.maps.Polygon({
-    path:poly1,
-    strokeColor: "#0000FF",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#0000FF",
-    fillOpacity: 0.05
-  });
-  flightPath1.setMap(map);
+        var options = {
+          title: 'Cropping'
+        };
 
-    }
-
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
 </script>
 <br>
 <center>
+
+
 <select id="type" onchange="filterMarkers1(this.value);">
 
     <option value="">Please select Village</option>
@@ -336,8 +339,8 @@
     <option value="Amruthalur">Amruthalur</option>
     <option value="Govada">Govada</option></select>
 <br><br><br>
-<button class="button button3" onclick="filterMarkers('0');">Houses</button>
-<button class="button button1" onclick="filterMarkers('1');">Farms</button>
+<button class="button button3" onclick="filterMarkers('1');">Houses</button>
+<button class="button button1" onclick="filterMarkers('0');">Farms</button>
 <button class="button button2" onclick="filterMarkers('2');">Wells</button>
 <button class="button button5" onclick="filterMarkers('3');">See All</button>	</center>
 <p id="test"></p>
@@ -345,5 +348,14 @@
 To use this code on your website, get a free API key from Google.
 Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div id="chart_div" style="height: 300px; width: 300px;">
+<span class="close">&times;</span>
+  </div>
+
+</div>
 </body>
 </html>
