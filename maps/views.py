@@ -15,13 +15,13 @@ def index(request):
 def farmertable(request):
     url="https://10.0.3.23:8787/farmer/?format=json"
     response=urllib.urlopen(url)
-    data = response.read()
-    return HttpResponse(data)
+    jsondata = json.loads(response.read())
+    return jsondata
     
 def farmtable(request):
     url="https://10.0.3.23:8787/farm/?format=json"
     response=urllib.urlopen(url)
-    jsondata=json.loads(response.read())
+    jsondata= json.loads(response.read())
     return jsondata
     
 def housetable(request):
