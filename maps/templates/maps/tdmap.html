@@ -173,7 +173,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		{
 			var stat="in use";
 		}
-		locations.push([stat,{{i.Poi.coordinates.0|safe}},{{i.Poi.coordinates.1|safe}},"Vardaiahpalem",t])
+		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},"Vardaiahpalem",t,0])
     console.log({{i.Poi.coordinates.0|safe}});
      {% endfor %}
     
