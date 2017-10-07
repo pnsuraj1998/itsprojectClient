@@ -12,49 +12,49 @@ import requests
 def index(request):
     return HttpResponse('<h2>The Index of Myapp..</h2>')
     
-def farmertable(request):
+def farmer(request):
     url="https://10.0.3.23:8787/farmer/?format=json"
     response=urllib.urlopen(url)
     data = response.read()
     return HttpResponse(data)
     
-def farmtable(request):
+def farm(request):
     url="https://10.0.3.23:8787/farm/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def housetable(request):
+def house(request):
     url="https://10.0.3.23:8787/house/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def memberstable(request):
+def members(request):
     url="https://10.0.3.23:8787/members/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def farmpointstable(request):
+def farmpoints(request):
     url="https://10.0.3.23:8787/farmpoints/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def croptable(request):
+def crop(request):
     url="https://10.0.3.23:8787/crop/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def wellstable(request):
+def wells(request):
     url="https://10.0.3.23:8787/wells/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
     return jsondata
     
-def publicplacestable(request):
+def publicplaces(request):
     url="https://10.0.3.23:8787/publicplaces/?format=json"
     response=urllib.urlopen(url)
     jsondata=json.loads(response.read())
