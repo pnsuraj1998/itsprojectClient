@@ -153,7 +153,7 @@ google.load("visualization", "1", {packages:["corechart"]});
     var farmernumber="{{i.Number}}"
 	{% for j in house %}
 		var t=0;
-		var Vil={{j.Village}};
+		var Vil="Vardaiahpalem";
        
 		locations.push([farmername,80.0,59.0,Vil,t,5]);
 	{% endfor %}
@@ -172,7 +172,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		{
 			var stat="in use";
 		}
-		locations.push([stat,{{i.Poi.coordinates.0}},{{i.Poi.coordinates.1}},{{i.Village}},t])
+		locations.push([stat,{{i.Poi.coordinates.0}},{{i.Poi.coordinates.1}},"Vardaiahpalem",t])
      {% endfor %}
     
     {% for i in farmer %}
