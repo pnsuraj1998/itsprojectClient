@@ -94,5 +94,5 @@ def mappoints(request):
     publicplaces_res=urllib.urlopen(url)
     publicplacesjsondata=json.loads(publicplaces_res.read())
     
-    return render(request, 'maps/tdmap.html', {'farmer':farmerjsondata,'farm':farmjsondata, 'house':housejsondata, 'farmpoints':farmpointsjsondata, 'wells':wellsjsondata,'publicplaces':publicplacesjsondata, 'members':membersjsondata, 'crop':cropjasondata})
+    return render(request, 'maps/tdmap.html', {'farmer':farmerjsondata,'farm':farmjsondata, 'house':housejsondata, 'farmpoints':farmpointsjsondata, 'wells':wellsjsondata,'publicplaces':publicplacesjsondata, 'members':membersjsondata, 'crop':cropjsondata})
     
