@@ -149,18 +149,18 @@ google.load("visualization", "1", {packages:["corechart"]});
     /////////////////////////////////////////////////////////////////////////////
     {% for i in farmer %}
 	var farmerid={{i.id}};
-	var farmername="{{i.Name}}";
-    var farmernumber="{{i.Number}}"
+	var farmername="{{i.Name|safe}}";
+    var farmernumber="{{i.Number|safe}}"
 	{% for j in house %}
 		var t=0;
 		var Vil="Vardaiahpalem";
        
-		locations.push([farmername,{{j.Poi.coordinates.0}},{{j.Poi.coordinates.1}},Vil,t,5]);
+		locations.push([farmername,{{j.Poi.coordinates.0|safe}},{{j.Poi.coordinates.1|safe}},Vil,t,5]);
 	{% endfor %}
     {% endfor %}
     
     {% for i in well %}
-		var wellid={{i.id}};
+		var wellid={{i.id|safe}};
 		var t=2;
 		var status=1;
 		//var status={{i.working}};
@@ -172,13 +172,13 @@ google.load("visualization", "1", {packages:["corechart"]});
 		{
 			var stat="in use";
 		}
-		locations.push([stat,{{i.Poi.coordinates.0}},{{i.Poi.coordinates.1}},"Vardaiahpalem",t])
-    console.log({{i.Poi.coordinates.0}});
+		locations.push([stat,{{i.Poi.coordinates.0|safe}},{{i.Poi.coordinates.1|safe}},"Vardaiahpalem",t])
+    console.log({{i.Poi.coordinates.0|safe}});
      {% endfor %}
     
     {% for i in farmer %}
-		var farmerid={{i.id}};
-		var farmername="{{i.Name}}";
+		var farmerid={{i.id|safe}};
+		var farmername="{{i.Name|safe}}";
 
 		{% for j in farm %}
 			var l=[]
@@ -192,7 +192,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 					var Vil="Amruthalur";
 					var earning={{j.Income}}
 					var t=1;
-						l.push({ lat: {{pts.Lat}}, lng: {{pts.Lon}} });
+						l.push({ lat: {{pts.Lat|safe}}, lng: {{pts.Lon|safe}} });
 						locations.push([farmername, 70.00,54.654,Vil,t,earning]);
 					}
      		{% endfor %}
