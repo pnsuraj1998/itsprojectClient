@@ -16,7 +16,7 @@ def farmertable(request):
     url="http://10.0.3.23:8787/farmer/?format=json"
     response=urllib.urlopen(url)
     jsondata = json.loads(response.read())
-    return render(request, 'tdmap.html', {'farmer':jsondata})
+    return jsondata
     
 def farmtable(request):
     url="http://10.0.3.23:8787/farm/?format=json"
