@@ -150,7 +150,8 @@ google.load("visualization", "1", {packages:["corechart"]});
     {% for i in farmer %}
 	var farmerid={{i.id|safe}};
 	var farmername="{{i.Name|safe}}";
-    var farmernumber="{{i.Number|safe}}"
+   	var farmernumber="{{i.Number|safe}}"
+	
 	{% for j in house %}
 		var t=1;
 		var Vil="Vardaiahpalem";
@@ -304,7 +305,7 @@ google.load("visualization", "1", {packages:["corechart"]});
         return function() {
         	if(locations[i][4]==1)
         	{
-        		cnt=locations[i][0]+","+locations[i][3]+ "\n earning: "+locations[i][5];
+        		cnt=locations[i][0]+","+locations[i][3]+ "\n No of persons: "+locations[i][5];
           	}
 
           	else if(locations[i][4]==0)
