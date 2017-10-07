@@ -150,9 +150,11 @@ google.load("visualization", "1", {packages:["corechart"]});
     {% for i in farmer %}
 	var farmerid={{i.id}};
 	var farmername="{{i.Name}}";
+    var farmernumber="{{i.Number}}"
 	{% for j in house %}
 		var t=0;
-		var Vil={{;
+		var Vil={{j.Village}};
+       
 		locations.push([farmername,{{j.Lat}},{{j.Lon}},Vil,t]);
 	{% endfor %}
     {% endfor %}
