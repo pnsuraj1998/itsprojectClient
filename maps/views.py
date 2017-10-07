@@ -15,8 +15,8 @@ def index(request):
 def farmertable(request):
     url="https://10.0.3.23:8787/farmer/?format=json"
     response=urllib2.urlopen(url)
-    jsondata=json.loads(response.read())
-    return jsondata
+    data = response.read()
+	return HttpResponse(data)
     
 def farmtable(request):
     url="https://10.0.3.23:8787/farm/?format=json"
