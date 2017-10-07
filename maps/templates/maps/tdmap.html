@@ -195,10 +195,12 @@ google.load("visualization", "1", {packages:["corechart"]});
 					var Vil="{{j.Village}}";
 					var earning={{j.Income}}
 					var t=0;
-      {% for ite in pts.Polygon.coordinates %}
-            locations.push([farmername,{{ite.1|safe}},{{ite.0|safe}},"Vard",t,0])
-       {% endfor %}
-      
+      	{% for ik in range(0,1): %}
+      					{% for ite in pts.Polygon.coordinates.ik %}
+            					locations.push([farmername,{{ite.1|safe}},{{ite.0|safe}},"Vard",t,0])
+					 {% ik=ik+1 %}
+       					{% endfor %}
+			{% endfor %}
 					}
      		{% endfor %}
 
