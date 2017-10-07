@@ -20,15 +20,15 @@ from maps import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^maps/', include('maps.urls')),
-    url(r'^house/', views.housetable, name= 'housetable'),
-    url(r'^farmer/',views.farmertable, name= 'farmertable'),
-    url(r'^farm/',views.farmtable, name= 'farmtable'),
-    url(r'^farmpoints/',views.farmpointstable, name= 'farmpointstable'),
-    url(r'^wells/',views.wellstable, name= 'wellstable'),
-    url(r'^publicplaces/',views.publicplacestable, name= 'publicplacestable'),
-    url(r'^members/',views.memberstable, name= 'memberstable'),
-    url(r'^crop/',views.croptable, name= 'croptable'),
+    url(r'^allmaps/', include('maps.urls')),
+    url(r'^allhouse/', views.housetable, name= 'housetable'),
+    url(r'^allfarmer/',views.farmertable, name= 'farmertable'),
+    url(r'^allfarm/',views.farmtable, name= 'farmtable'),
+    url(r'^allfarmpoints/',views.farmpointstable, name= 'farmpointstable'),
+    url(r'^allwells/',views.wellstable, name= 'wellstable'),
+    url(r'^allpublicplaces/',views.publicplacestable, name= 'publicplacestable'),
+    url(r'^allmembers/',views.memberstable, name= 'memberstable'),
+    url(r'^allcrop/',views.croptable, name= 'croptable'),
 ]
 
 urlpatterns=format_suffix_patterns(urlpatterns)
