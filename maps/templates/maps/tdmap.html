@@ -141,7 +141,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 
 	var welldata="{{wells}}";
 	var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
+      zoom: 12,
       center: new google.maps.LatLng(13.890542, 78.274856),
       mapTypeId: google.maps.MapTypeId.HYBRID
     });
@@ -178,47 +178,12 @@ google.load("visualization", "1", {packages:["corechart"]});
     
      {% endfor %}
     
-    {% for i in farmer %}
-		var farmerid={{i.id|safe}};
-		var farmername="{{i.Name|safe}}";
-
-		{% for j in farm %}
-			var l=[]
-			var fid={{j.F_id}};		
-			if (fid==farmerid)
-            {				
-				var farmid={{j.id}};
-
-				{% for pts in farmpoints %}
-					var faid={{pts.Farm_id}};
-					if(faid==farmid){
-					var Vil="{{j.Village}}";
-					var earning={{j.Income}}
-					var t=0;
-      					
-      						{% for ite in pts.0.Polygon.coordinates.0 %}
-            						locations.push([farmername,{{ite.1|safe}},{{ite.0|safe}},"Vard",t,0])
-						 
-       					
-			{% endfor %}
-					}
-     		{% endfor %}
-
-						var flightPath0 = new google.maps.Polygon({
-						    path:l,
-						    strokeColor: "#0000FF",
-						    strokeOpacity: 0.8,
-   							strokeWeight: 2,
-						    fillColor: "#0000FF",
-				    		fillOpacity: 0.05
- 						 });
-					  flightPath0.setMap(map);
-				}
+     {% for i in farmer %}
+        
+     
      {% endfor %}
-		{% endfor %}
-    
-   
-    /////////////////////////////////////////////////////////////////////////////
+     
+ /////////////////////////////////////////////////////////////////////////////
     
    //var locations = [
   //    ['Bondi Beach', -33.890542, 151.274856, 'Amarthalur',0],
