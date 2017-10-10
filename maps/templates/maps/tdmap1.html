@@ -160,7 +160,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		var t=1;
 		var Vil="{{j.Village}}";
        
-		locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}}]);
+		locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}},img_url]);
 	{% endfor %}
     {% endfor %}
     
