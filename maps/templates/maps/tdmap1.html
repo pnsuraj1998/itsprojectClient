@@ -198,11 +198,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 //];
 console.log(locations.length);
 		 console.log(locations);
-    var infowindow = new google.maps.InfoWindow({
-              //when I add <IMG BORDER="0" ALIGN="Left" SRC="stagleton.jpg"> the maps will not load
-      content: '<IMG BORDER="0" ALIGN="Left" SRC="{{i.Photo|safe}}"> "My name is "' + farmername
-
-    });
+    var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
     var choice=0
@@ -286,7 +282,7 @@ console.log(locations.length);
         return function() {
         	if(locations[i][4]==1)
         	{
-        		cnt=locations[i][0]+","+locations[i][3]+ "\n No of persons: "+locations[i][5]+'<IMG BORDER="0" ALIGN="Left" SRC=locations[i][6]>';
+        		cnt=locations[i][0]+","+locations[i][3]+ "\n No of persons: "+locations[i][5]+'<IMG BORDER="0" ALIGN="Left" SRC="/media/raviraju.png">';
           	}
 
           	else if(locations[i][4]==0)
