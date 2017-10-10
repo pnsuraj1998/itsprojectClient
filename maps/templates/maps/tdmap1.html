@@ -150,7 +150,11 @@ google.load("visualization", "1", {packages:["corechart"]});
     {% for i in farmer %}
 	var farmerid={{i.id|safe}};
 	var farmername="{{i.Name|safe}}";
-   	var farmernumber="{{i.Number|safe}}"
+   	var farmernumber="{{i.Number|safe}}";
+	
+	
+	var img_url="{{i.Photo|safe}}";
+	console.log(img_url);
 	
 	{% for j in house %}
 		var t=1;
