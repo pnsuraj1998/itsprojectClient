@@ -200,7 +200,7 @@ console.log(locations.length);
 		 console.log(locations);
     var infowindow = new google.maps.InfoWindow({
               //when I add <IMG BORDER="0" ALIGN="Left" SRC="stagleton.jpg"> the maps will not load
-      content: '<IMG BORDER="0" ALIGN="Left" SRC="{{img_src}}"> "My name is "' + farmername
+      content: '<IMG BORDER="0" ALIGN="Left" SRC="{{i.Photo|safe}}"> "My name is "' + farmername
 
     });
 
