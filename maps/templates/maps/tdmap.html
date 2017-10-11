@@ -145,27 +145,26 @@ google.load("visualization", "1", {packages:["corechart"]});
       center: new google.maps.LatLng(13.890542, 78.274856),
       mapTypeId: google.maps.MapTypeId.HYBRID
     });
-
+//Retrieving data
     /////////////////////////////////////////////////////////////////////////////
     {% for i in farmer %}
-	var farmerid={{i.id|safe}};
-	var farmername="{{i.Name|safe}}";
-   	var farmernumber="{{i.Number|safe}}"
+	    var farmerid={{i.id|safe}};
+	    var farmername="{{i.Name|safe}}";
+   	    var farmernumber="{{i.Number|safe}}"
 	
-	{% for j in house %}
-		var t=1;
-		var Vil="{{j.Village}}";
-       
-		locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}}]);
-	{% endfor %}
+	    {% for j in house %}
+		    var t=1;
+		    var Vil="{{j.Village}}";
+            locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}}]);
+	    {% endfor %}
     {% endfor %}
     
     {% for i in wells %}
 		var wellid={{i.id|safe}};
 		var t=2;
 		var status=1;
-		//var status={{i.working}};
-        var Vil="{{i.Village}}"
+		//var status={{i.working|safe}};
+        var Vil="{{i.Village|safe}}"
 		if(status==0)
 		{
 			var stat="not in use";
@@ -179,19 +178,27 @@ google.load("visualization", "1", {packages:["corechart"]});
      {% endfor %}
     
      {% for i in farmer %}
-        
+        var farmerid={{i.id|safe}};
+        var t=0;
+        //PHOTO , AUDIO???//////////////////////////////////////
+        {% for j in farm %}}
+            var totalarea={{j.Area|safe}};
+            var totalincome={{j.Income|safe}};
+            var Vil="{{j.Village|safe}}";
+            var farmid={{j.id|safe}};
+            {% for k in farmpoints %}
+                var farmpointsid={{k.id|safe}};
+                var seqno={{k.Seqno|safe}};
+                var coordinates=k[0].Polygon.coordinates;
+                document.write(coordinates);
+            {% endfor %}
+        {% endfor %}
      
      {% endfor %}
      
  /////////////////////////////////////////////////////////////////////////////
     
-   //var locations = [
-  //    ['Bondi Beach', -33.890542, 151.274856, 'Amarthalur',0],
-   //   ['Coogee Beach', -33.923036, 151.259052, 'Amarthalur',1,5],
-   //   ['Cronulla Beach', -34.028249, 151.157507, 'Govada',1,10],
-   //   ['Manly Beach', -33.80010128657071, 151.28747820854187,'Govada',2],
-    //  ['Maroubra Beach', -33.950198, 151.259302, 'Govada',1,15]
-//];
+  
 console.log(locations.length);
 		 console.log(locations);
     var infowindow = new google.maps.InfoWindow();
