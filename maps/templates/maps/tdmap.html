@@ -181,7 +181,7 @@ google.load("visualization", "1", {packages:["corechart"]});
     
      {% for i in farmer %}
         var farmerid={{i.id|safe}};
-      	var farmername="{{i.id|safe}}";
+      	var farmername="{{i.Name|safe}}";
         var t=0;
         //PHOTO , AUDIO???//////////////////////////////////////
         {% for j in farm %}
