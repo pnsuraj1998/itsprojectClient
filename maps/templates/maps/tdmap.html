@@ -169,11 +169,11 @@ google.load("visualization", "1", {packages:["corechart"]});
 	     	var Avgyield={{i.AvgYield|safe}};
 		if(status=="True")
 		{
-			var stat="not in use";
-		}
-		else
-		{
 			var stat="in use";
+		}
+		else if(status=="False")
+		{
+			var stat="Not in use";
 		}
 		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},Vil,t,Avgyield,Depth]);
     
