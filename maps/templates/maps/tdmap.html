@@ -124,10 +124,10 @@
 <script>
 
 google.load("visualization", "1", {packages:["corechart"]});
-	var markers=[]
-	var poly=[]
-    	var locations=[];	
-    
+	var markers=[];
+	var poly=[];
+    var locations=[];	
+    var crops=[];
 	var farmdata="{{farm}}";
 //	document.write(farmdata);
 
@@ -179,20 +179,23 @@ google.load("visualization", "1", {packages:["corechart"]});
 		}
 		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},Vil,t,Avgyield,Depth]);
      {% endfor %}
-    
+     var id=0;
      {% for i in farmer %}
+        id=id+1;
         var farmerid={{i.id|safe}};
       	var farmername="{{i.Name|safe}}";
         var t=0;
         //PHOTO , AUDIO???//////////////////////////////////////
+        var dictofcrop={};
         {% for j in farm %}
             
-	    if( {{j.F_id|safe}}== farmerid )
-	    {
+	        if( {{j.F_id|safe}}== farmerid )
+	        {
 		        var totalarea={{j.Area|safe}};
             	var totalincome={{j.Income|safe}};
             	var Vil="{{j.Village|safe}}";
             	var farmid={{j.id|safe}};
+         //For FARMPLOTTING------------------------------
 	    	    {% for k in farmpoints %}
                     if({{k.Farm_id|safe}}==farmid)
                     {
@@ -204,15 +207,15 @@ google.load("visualization", "1", {packages:["corechart"]});
 			            var count=0;//new
 	     		        {% for l in k.Polygon.coordinates.0 %}
                 		    var coordinates={{l|safe}};
-	 			        l.push({ lat: {{l.1|safe}}, lng: {{l.0|safe}} });
-				        a=a+{{l.1|safe}};
-				        b=b+{{l.0|safe}};
-				        count=count+1;
-                	//locations.push([farmername,{{l.1|safe}},{{l.0|safe}},Vil,t,totalarea,totalincome]);
-			         {% endfor %}
+	 			            l.push({ lat: {{l.1|safe}}, lng: {{l.0|safe}} });
+				            a=a+{{l.1|safe}};
+				            b=b+{{l.0|safe}};
+				            count=count+1;
+                	//locations.push([farmername,{{l.1|safe}},{{l.0|safe}},Vil,t,totalarea,totalincome]); ///(old)
+			            {% endfor %}
 		                var a1=a/count;
 		                var b1=b/count;
-		                locations.push([farmername,a1,b1,Vil,t,totalarea,totalincome]);
+		                locations.push([farmername,a1,b1,Vil,t,totalarea,totalincome,id]);
 		                var flightPath0 = new google.maps.Polygon({
 						    path:l,
 						    strokeColor: "#0000FF",
@@ -221,10 +224,28 @@ google.load("visualization", "1", {packages:["corechart"]});
 						    fillColor: "#0000FF",
 				    		fillOpacity: 0.05
  						 });
-				flightPath0.setMap(map);
+				        flightPath0.setMap(map);
                     }	
-             {% endfor %}     
-	    }
+                {% endfor %}
+            //FOR CROPS-------------------- 
+                var listofnameperc=[];
+                {% for k in crop %}
+                    if({{k.Farm_id|safe}}==farmid)
+                    {
+                        var nameperc=[];
+                        var name="{{k.Name|safe}}";
+                        var perc={{k.Percentage|safe}};
+                        var season="{{k.Season|safe}}";
+                        var year={{k.Year|safe}};
+                        var income={{k.Income|safe}};
+                        nameperc.append(name);
+                        nameperc.append(perc);
+                        listofnameperc.append(nameperc);
+                    }
+                {% endfor %}
+                crops.append(listofnameperc);
+	            document.write(crops);
+           }
         {% endfor %}
      {% endfor %}
      
@@ -317,13 +338,13 @@ google.load("visualization", "1", {packages:["corechart"]});
           	else if(locations[i][4]==0)
           	{
           		cnt=locations[i][0]+", "+locations[i][3]+", "+locations[i][5] +" acres, Income(per annum):"+locations[i][6];
-                	var modal = document.getElementById('myModal');
+                var modal = document.getElementById('myModal');
 
             // Get the button that opens the modal
             //var btn = document.getElementById("myBtn");
 
             // Get the <span> element that closes the modal
-            		var span = document.getElementsByClassName("close")[0];
+            	var span = document.getElementsByClassName("close")[0];
           	}
 
           	else if(locations[i][4]==2)
