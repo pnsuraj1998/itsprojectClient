@@ -230,6 +230,10 @@ google.load("visualization", "1", {packages:["corechart"]});
                 {% endfor %}
             //FOR CROPS-------------------- 
                 var listofnameperc=[];
+		var namelist=[];
+		 namelist.push("Name");
+		 namelist.push("Percentage");
+		 listofnameperc.push(namelist);
                 {% for k in crop %}
                     if({{k.Farm_id|safe}}==farmid)
                     {
@@ -349,8 +353,8 @@ google.load("visualization", "1", {packages:["corechart"]});
 			            modal.style.display = "block";
 			var checkin=locations[i][7];
 			//document.write(crops[checkin]);
-           // drawChart(crops);
-		      console.log(crops);
+            drawChart(crops[checkin]);
+		      console.log(crops[checkin]);
 
      
 // When the user clicks on <span> (x), close the modal
