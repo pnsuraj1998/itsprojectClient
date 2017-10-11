@@ -158,7 +158,7 @@ google.load("visualization", "1", {packages:["corechart"]});
             {
                 var t=1;
 		        var Vil="{{j.Village}}";
-                locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}}]);
+                locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}},img_url]);
             } 
        	    {% endfor %}
     {% endfor %}
@@ -338,7 +338,7 @@ google.load("visualization", "1", {packages:["corechart"]});
         return function() {
         	if(locations[i][4]==1)
         	{
-        		cnt=locations[i][0]+", "+locations[i][3]+ " \n No of persons: "+locations[i][5];
+        		cnt=locations[i][0]+","+locations[i][3]+ "\n No of persons: "+locations[i][5]+'<BR/>'+'<IMG BORDER="0" FLOAT="Left" HEIGHT=100px WIDTH=100px SRC='+locations[i][6]+'>';
           	}
 
           	else if(locations[i][4]==0)
