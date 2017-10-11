@@ -128,26 +128,16 @@ google.load("visualization", "1", {packages:["corechart"]});
 	var poly=[];
     var locations=[];	
     var crops=[];
-	
-	var farmdata="{{farm}}";
-//	document.write(farmdata);
-
-	var farmerdata="{{farmer}}";
-//	document.write(farmdata);
-	
-	var farmpointsdata="{{farmpoints}}";
-	//document.write(farmdata);
-
-	var housedata="{{house}}";
-
-	var welldata="{{wells}}";
+	//LAUNCHING Map--------
 	var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
       center: new google.maps.LatLng(13.890542, 78.274856),
       mapTypeId: google.maps.MapTypeId.HYBRID
     });
-//Retrieving data
+    
+    //Retrieving data
     /////////////////////////////////////////////////////////////////////////////
+    //Houses-
     {% for i in farmer %}
 	    var farmerid={{i.id|safe}};
 	    var farmername="{{i.Name|safe}}";
@@ -162,7 +152,7 @@ google.load("visualization", "1", {packages:["corechart"]});
             } 
        	    {% endfor %}
     {% endfor %}
-    
+    //Wells-
     {% for i in wells %}
 		var wellid={{i.id|safe}};
 		var t=2;
@@ -180,17 +170,17 @@ google.load("visualization", "1", {packages:["corechart"]});
 		}
 		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},Vil,t,Avgyield,Depth]);
      {% endfor %}
+     //Farms-
      var id=-1;
      {% for i in farmer %}
         id=id+1;
         var farmerid={{i.id|safe}};
       	var farmername="{{i.Name|safe}}";
         var t=0;
-        //PHOTO , AUDIO???//////////////////////////////////////
         var dictofcrop={};
         {% for j in farm %}
-            
-	        if( {{j.F_id|safe}}== farmerid )
+               
+	        if( {{j.F_id|safe}}== farmerid )        //Matching Farmer ids
 	        {
 		        var totalarea={{j.Area|safe}};
             	var totalincome={{j.Income|safe}};
@@ -198,7 +188,7 @@ google.load("visualization", "1", {packages:["corechart"]});
             	var farmid={{j.id|safe}};
          //For FARMPLOTTING------------------------------
 	    	    {% for k in farmpoints %}
-                    if({{k.Farm_id|safe}}==farmid)
+                    if({{k.Farm_id|safe}}==farmid)          //Matching Farm ids
                     {
                 	    var farmpointsid={{k.id|safe}};
                		    var seqno={{k.Seqno|safe}};
@@ -206,14 +196,14 @@ google.load("visualization", "1", {packages:["corechart"]});
                         var a=0; //new
 			            var b=0; //new
 			            var count=0;//new
-	     		        {% for l in k.Polygon.coordinates.0 %}
+                        //FINDING MARKER position so as to place it at center of FARM-
+	     		        {% for l in k.Polygon.coordinates.0 %} 
                 		    var coordinates={{l|safe}};
 	 			            l.push({ lat: {{l.1|safe}}, lng: {{l.0|safe}} });
 				            a=a+{{l.1|safe}};
 				            b=b+{{l.0|safe}};
 				            count=count+1;
-                	//locations.push([farmername,{{l.1|safe}},{{l.0|safe}},Vil,t,totalarea,totalincome]); ///(old)
-			            {% endfor %}
+                	   {% endfor %}
 		                var a1=a/count;
 		                var b1=b/count;
 		                locations.push([farmername,a1,b1,Vil,t,totalarea,totalincome,id]);
@@ -230,11 +220,12 @@ google.load("visualization", "1", {packages:["corechart"]});
                 {% endfor %}
             //FOR CROPS-------------------- 
                 var listofnameperc=[];
-		var namelist=[];
-		 namelist.push("Name");
-		 namelist.push("Percentage");
-		 listofnameperc.push(namelist);
-                {% for k in crop %}
+		        var namelist=[];
+		        namelist.push("Name");
+		        namelist.push("Percentage");
+		        listofnameperc.push(namelist);
+                //TRAVERSING THROUGH CROPs-----
+                 {% for k in crop %}
                     if({{k.Farm_id|safe}}==farmid)
                     {
                         var nameperc=[];
@@ -243,21 +234,18 @@ google.load("visualization", "1", {packages:["corechart"]});
                         var season="{{k.Season|safe}}";
                         var year={{k.Year|safe}};
                         var income={{k.Income|safe}};
-                        nameperc.push(name);
-                        nameperc.push(perc);
-                        listofnameperc.push(nameperc);
-			//console.log(listofnameperc);
-                    }
+                        nameperc.push(name);            //PUSHING Name of crop to pie chart
+                        nameperc.push(perc);            //PUSHING Percentage of crop to pie chart
+                        listofnameperc.push(nameperc);  //PUSHING the values to PIE CHART entries
+			       }
                 {% endfor %}
                 crops.push(listofnameperc);
-
            }
         {% endfor %}
      {% endfor %}
      
  /////////////////////////////////////////////////////////////////////////////
-    var infowindow = new google.maps.InfoWindow();
-
+    var infowindow = new google.maps.InfoWindow();          //declaring INFOWINDOW
     var marker, i;
     var choice=0
     for (i = 0; i < locations.length; i++) 
@@ -275,7 +263,7 @@ google.load("visualization", "1", {packages:["corechart"]});
         	markers.push(marker);
         
         }
-	 //for houses---------------------   
+	 //MARKING for houses---------------------   
 	 else if (locations[i][4]==1)
         {
            	 var icon1 = {
@@ -296,21 +284,23 @@ google.load("visualization", "1", {packages:["corechart"]});
                     origin: new google.maps.Point(0,0), // origin
                    anchor: new google.maps.Point(0, 0) // anchor
               };
-          if (locations[i][5]<=2){
+            
+            //DEFFERENTIATING SIZE OF MARKERS WITH RESPECT TO NO. OF PERSONS LIVING IN THE HOUSE-
+          if (locations[i][5]<=2){              //SMALL IF No.  Of Persons<=2
             marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon1,
          map: map
           });
         }
-         else if (locations[i][5]>2 && locations[i][5]<=4){
+         else if (locations[i][5]>2 && locations[i][5]<=4){     //MEDIUM IF 2 < No. OF Persons <= 4
           marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon2,
          map: map
           });
         }
-         else {
+         else {                                                     //LARGE IF No. OF Persons > 4
           marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon3,
@@ -322,9 +312,9 @@ google.load("visualization", "1", {packages:["corechart"]});
             markers.push(marker); 
         }
 	    
-	    //wells--------------------------
+	    //MARKING wells--------------------------
         else{
-		marker = new google.maps.Marker({
+		    marker = new google.maps.Marker({
         	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          	icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
          	map: map
@@ -346,23 +336,9 @@ google.load("visualization", "1", {packages:["corechart"]});
           		cnt=locations[i][0]+", "+locations[i][3]+", "+locations[i][5] +" acres, Income(per annum):"+locations[i][6];
                 var modal = document.getElementById('myModal');
 
-            // Get the button that opens the modal
-            //var btn = document.getElementById("myBtn");
-
-            // Get the <span> element that closes the modal
-           
-                //	var span = document.getElementsByClassName("close")[0];
-			 modal.style.display = "block";
-			var checkin=locations[i][7];
-			//document.write(crops[checkin]);
-            		drawChart(crops[checkin]);
-		      //console.log(crops[checkin]);
-
-     
-// When the user clicks on <span> (x), close the modal
-          	  //	span.onclick = function() {
-           	 //		modal.style.display = "none";
-			// }
+    			 modal.style.display = "block";
+	    	     var checkin=locations[i][7];
+       		     drawChart(crops[checkin]);
 
 // When the user clicks anywhere outside of the modal, close it
            	 window.onclick = function(event) {
