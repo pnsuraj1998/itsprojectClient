@@ -195,17 +195,13 @@ google.load("visualization", "1", {packages:["corechart"]});
 	     	{% for l in k.Polygon.coordinates.0 %}
                 	var coordinates={{l|safe}};
 	     		
-                	locations.push([farmername,{{l.1|safe}},{{l.0|safe}},Vil,t,totalarea]);
+                	locations.push([farmername,{{l.1|safe}},{{l.0|safe}},Vil,t,totalarea,totalincome]);
 		{% endfor %}
             {% endfor %}
         {% endfor %}
      {% endfor %}
      
  /////////////////////////////////////////////////////////////////////////////
-    
-  
-    console.log(locations.length);
-    console.log(locations);
     var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
@@ -293,7 +289,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 
           	else if(locations[i][4]==0)
           	{
-          		cnt=locations[i][0]+", "+locations[i][3]+", "+locations[i][5];
+          		cnt=locations[i][0]+", "+locations[i][3]+", "+locations[i][5] +"acres, Income:"+locations[i][6];
                 	var modal = document.getElementById('myModal');
 
             // Get the button that opens the modal
