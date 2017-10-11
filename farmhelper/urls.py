@@ -19,18 +19,18 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from maps import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^allmaps/', include('maps.urls')),
-    url(r'^allhouse/', views.housetable, name= 'house'),
-    url(r'^allfarmer/',views.farmertable, name= 'farmer'),
-    url(r'^allfarm/',views.farmtable, name= 'farm'),
-    url(r'^allfarmpoints/',views.farmpointstable, name= 'farmpoints'),
-    url(r'^allwells/',views.wellstable, name= 'wells'),
-    url(r'^allpublicplaces/',views.publicplacestable, name= 'publicplaces'),
-    url(r'^allmembers/',views.memberstable, name= 'members'),
-    url(r'^allcrop/',views.croptable, name= 'crop'),
-    url(r'^maps/',views.mappoints,name='mappoints'),
-    url(r'^dupmaps/',views.mappoints1,name='mappoints1'),
+    url(r'^admin/', admin.site.urls),                                                           #Access admin
+    url(r'^allmaps/', include('maps.urls')),                                                   
+    url(r'^allhouse/', views.housetable, name= 'house'),                                        #Access House table
+    url(r'^allfarmer/',views.farmertable, name= 'farmer'),                                       #Access Farmer table
+    url(r'^allfarm/',views.farmtable, name= 'farm'),                                             #Access Farm table
+    url(r'^allfarmpoints/',views.farmpointstable, name= 'farmpoints'),                          #Access FarmCoordinates
+    url(r'^allwells/',views.wellstable, name= 'wells'),                                         #Access Wells table
+    url(r'^allpublicplaces/',views.publicplacestable, name= 'publicplaces'),                    #Access PublicPlaces table
+    url(r'^allmembers/',views.memberstable, name= 'members'),                                   #Access Family members of Farmer
+    url(r'^allcrop/',views.croptable, name= 'crop'),                                            #Access Cropping Details of Farm
+    url(r'^maps/',views.mappoints,name='mappoints'),                                            #Access Map page(main page)
+    url(r'^dupmaps/',views.mappoints1,name='mappoints1'),                                       #Access test map page
 ]
 
 urlpatterns=format_suffix_patterns(urlpatterns)
