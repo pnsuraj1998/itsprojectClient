@@ -345,6 +345,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 
             // Get the <span> element that closes the modal
             	var span = document.getElementsByClassName("close")[0];
+			var checkin=locations[i][7];
           	}
 
           	else if(locations[i][4]==2)
@@ -358,9 +359,9 @@ google.load("visualization", "1", {packages:["corechart"]});
             
 
 // When the user clicks the button, open the modal 
-
+	
             modal.style.display = "block";
-            drawChart();
+            drawChart(crops[checkin]);
 
      
 // When the user clicks on <span> (x), close the modal
