@@ -162,7 +162,7 @@ google.load("visualization", "1", {packages:["corechart"]});
     {% for i in wells %}
 		var wellid={{i.id|safe}};
 		var t=2;
-		var status=1;
+	
 		var status={{i.working|safe}};
         	var Vil="{{i.Village|safe}}";
      		var Depth={{i.Depth|safe}};
