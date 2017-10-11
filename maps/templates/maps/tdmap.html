@@ -191,7 +191,7 @@ google.load("visualization", "1", {packages:["corechart"]});
                 var seqno={{k.Seqno|safe}};
 	     	{% for l in k.Polygon.coordinates.0 %}
                 	var coordinates={{l|safe}};
-	     		document.write(coordinates)
+	     		
                 	locations.push([stat,{{l.1|safe}},{{l.0|safe}},Vil,t,0]);
 		{% endfor %}
             {% endfor %}
