@@ -189,7 +189,7 @@ google.load("visualization", "1", {packages:["corechart"]});
             {% for k in farmpoints %}
                 var farmpointsid={{k.id|safe}};
                 var seqno={{k.Seqno|safe}};
-                var coordinates={{k.Polygon.coordinates.1|safe}};
+                var coordinates={{k.Polygon.coordinates.0.1|safe}};
                 document.write(coordinates);
             {% endfor %}
         {% endfor %}
@@ -198,8 +198,8 @@ google.load("visualization", "1", {packages:["corechart"]});
  /////////////////////////////////////////////////////////////////////////////
     
   
-	console.log(locations.length);
-	console.log(locations);
+    console.log(locations.length);
+    console.log(locations);
     var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
