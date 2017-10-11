@@ -164,7 +164,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		var t=2;
 		var status=1;
 		//var status={{i.working|safe}};
-        var Vil="{{i.Village|safe}}"
+        	var Vil="{{i.Village|safe}}"
 		if(status==0)
 		{
 			var stat="not in use";
@@ -173,7 +173,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		{
 			var stat="in use";
 		}
-		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},Vil,t,0])
+		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},Vil,t,0]);
     
      {% endfor %}
     
@@ -193,14 +193,13 @@ google.load("visualization", "1", {packages:["corechart"]});
                 document.write(coordinates);
             {% endfor %}
         {% endfor %}
-     
      {% endfor %}
      
  /////////////////////////////////////////////////////////////////////////////
     
   
-console.log(locations.length);
-		 console.log(locations);
+	console.log(locations.length);
+	console.log(locations);
     var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
