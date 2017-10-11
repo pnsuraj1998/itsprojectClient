@@ -288,12 +288,12 @@ google.load("visualization", "1", {packages:["corechart"]});
         return function() {
         	if(locations[i][4]==1)
         	{
-        		cnt=locations[i][0]+","+locations[i][3]+ "\n No of persons: "+locations[i][5];
+        		cnt=locations[i][0]+", "+locations[i][3]+ " \n No of persons: "+locations[i][5];
           	}
 
           	else if(locations[i][4]==0)
           	{
-          		cnt=locations[i][0]+","+locations[i][3]+","+locations[i][5];
+          		cnt=locations[i][0]+", "+locations[i][3]+", "+locations[i][5];
                 	var modal = document.getElementById('myModal');
 
             // Get the button that opens the modal
@@ -305,7 +305,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 
           	else if(locations[i][4]==2)
           	{
-          		cnt=locations[i][0]+",Lat:"+locations[i][1]+",Long:"+locations[i][2]+",Depth:"+locations[i][6]+",Avg Yield"+locations[i][5];
+          		cnt=locations[i][0]+" , Lat:"+locations[i][1]+" , Long:"+locations[i][2]+" , Depth:"+locations[i][6]+"m , Avg Yield(in Litres/day)"+locations[i][5];
           	}
             map.setZoom(19);
             map.setCenter(marker.getPosition());
