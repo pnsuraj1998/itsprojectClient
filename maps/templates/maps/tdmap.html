@@ -180,7 +180,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		}
 		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},Vil,t,Avgyield,Depth]);
      {% endfor %}
-     var id=0;
+     var id=-1;
      {% for i in farmer %}
         id=id+1;
         var farmerid={{i.id|safe}};
