@@ -57,7 +57,7 @@ ROOT_URLCONF = 'farmhelper.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates','/home/its_group-15/itsprojectClient/cesium/Apps/Sandcastle/gallery'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,7 +68,10 @@ TEMPLATES = [
             ],
         },
     },
+
+
 ]
+
 
 WSGI_APPLICATION = 'farmhelper.wsgi.application'
 
