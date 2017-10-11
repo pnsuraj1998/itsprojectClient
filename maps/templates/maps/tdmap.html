@@ -362,6 +362,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 	
             modal.style.display = "block";
             drawChart(crops[checkin]);
+		console.log(crops[checkin]);
 
      
 // When the user clicks on <span> (x), close the modal
@@ -423,7 +424,7 @@ google.load("visualization", "1", {packages:["corechart"]});
  }
 	        document.write(crops);
  function drawChart(k) {
-  console.log(k);
+  //console.log(k);
         var a='Task';
         var data = google.visualization.arrayToDataTable(k);
 
