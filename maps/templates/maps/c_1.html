@@ -15,198 +15,21 @@
 <script src="{% static 'cesium/Build/Cesium/Cesium.js' %}"></script>
 <script src="{% static 'cesium/Build/Cesium/Widgets/widgets.css' %}"></script>
 <script type="text/javascript">
-<script id="cesium_sandcastle_script">
-function startup(Cesium) {
-    'use strict';
-//Sandcastle_Begin
-var viewer = new Cesium.Viewer('cesiumContainer');
+	var viewer = new Cesium.Viewer('cesiumContainer');
 
-
-var pinBuilder = new Cesium.PinBuilder();
-
-var farmer_det={{farmer}};
-console.log(farmer_det);
-
-
-var lat= 13.556912;
-var lon= 80.010054;
-
-
-
-var greenWall = viewer.entities.add({
-    name : 'Farm',
-    wall : {
-        positions : Cesium.Cartesian3.fromDegreesArrayHeights([80.009954 ,13.556912, 20.0,
-                                                        80.010900, 13.557016, 20.0,
-                                                        80.010911, 13.556576, 20.0,
-                                                        80.010278, 13.556521, 20.0,
-                                                        80.009954 ,13.556912, 20.0,
-                                                        ]),
-        material : Cesium.Color.GREEN,
-        outline : true
-    }
-});
-
-
-
-
-
-var redCone = viewer.entities.add({
-    name : 'Red cone',
-    position: Cesium.Cartesian3.fromDegrees(lon+0.002,lat+0.0001),
+	var greenCylinder = viewer.entities.add({
+    name : 'Green cylinder with black outline',
+    position: Cesium.Cartesian3.fromDegrees(-100.0, 40.0, 200000.0),
     cylinder : {
-        length : 40.0,
-        topRadius : 0.0,
-        bottomRadius : 20.0,
-        material : Cesium.Color.RED
-    }
-});
-var bluePin = viewer.entities.add({
-    name : 'Farmer_1 House',
-    position : Cesium.Cartesian3.fromDegrees(lon+0.002,lat+0.0001,40),
-    billboard : {
-        image : pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48).toDataURL(),
-        verticalOrigin : Cesium.VerticalOrigin.BOTTOM
-    }
-});
-
-
-var greenCylinder = viewer.entities.add({
-    name : 'Well',
-    position : Cesium.Cartesian3.fromDegrees(lon,lat,1),
-    cylinder : {
-        length : 40.0,
-        topRadius : 5.0,
-        bottomRadius : 5.0,
-        material : Cesium.Color.BLUE.withAlpha(0.7),
+        length : 400000.0,
+        topRadius : 200000.0,
+        bottomRadius : 200000.0,
+        material : Cesium.Color.GREEN.withAlpha(0.5),
         outline : true,
-        outlineColor : Cesium.Color.DARK_BLUE,
-        //position : Cesium.Cartesian3.fromDegrees(-75.170726, 39.9208667),
-        verticalOrigin : Cesium.VerticalOrigin.BOTTOM,
+        outlineColor : Cesium.Color.DARK_GREEN
     }
-});
-
-
-
-
-console.log(greenCylinder.name);
-
-
-function flyToChittoor() {
-    Sandcastle.declare(flyToChittoor);
-    
-    viewer.camera.flyTo({
-        destination : Cesium.Cartesian3.fromDegrees(lon,lat,1000)
-    });
-}
-
-
-
-function flyToLocation() {
-    Sandcastle.declare(flyToLocation);
-
-    // Create callback for browser's geolocation
-    function fly(position) {
-        viewer.camera.flyTo({
-            destination : Cesium.Cartesian3.fromDegrees(position.coords.longitude, position.coords.latitude, 1000.0)
-        });
-    }
-
-    // Ask browser for location, and fly there.
-    navigator.geolocation.getCurrentPosition(fly);
-}
-
-function viewRectangle() {
-    Sandcastle.declare(viewRectangle);
-
-    var west = -77.0;
-    var south = 38.0;
-    var east = -72.0;
-    var north = 42.0;
-
-    var rectangle = Cesium.Rectangle.fromDegrees(west, south, east, north);
-    viewer.camera.setView({
-        destination: rectangle
-    });
-
-    // Show the rectangle.  Not required; just for show.
-    viewer.entities.add({
-        rectangle : {
-            coordinates : rectangle,
-            fill : false,
-            outline : true,
-            outlineColor : Cesium.Color.WHITE
-        }
-    });
-}
-
-var viewChanged = document.getElementById('viewChanged');
-
-var removeStart;
-var removeEnd;
-
-function cameraEvents() {
-    Sandcastle.declare(cameraEvents);
-
-    var camera = viewer.camera;
-    removeStart = camera.moveStart.addEventListener(function() {
-        viewChanged.style.display = 'block';
-    });
-    removeEnd = camera.moveEnd.addEventListener(function() {
-        viewChanged.style.display = 'none';
-    });
-}
-
-var cameraChanged = document.getElementById('cameraChanged');
-
-var removeChanged;
-
-function cameraChanges() {
-    Sandcastle.declare(cameraChanges);
-
-    var i = 0;
-    removeChanged = viewer.camera.changed.addEventListener(function(percentage) {
-        ++i;
-        cameraChanged.innerText = 'Camera Changed: ' + i + ', ' + percentage.toFixed(6);
-        cameraChanged.style.display = 'block';
-    });
-}
-
-
-
-Sandcastle.addToolbarMenu([{
-    text : 'Camera Options'
-},  {
-    text : 'Fly to Sricity',
-    onselect : function() {
-        flyToChittoor();
-        Sandcastle.highlight(flyToChittoor);
-    }
-},  {
-    text : 'Fly to My Location',
-    onselect : function() {
-        flyToLocation();
-        Sandcastle.highlight(flyToLocation);
-    }
-}, {
-    text : 'View a Rectangle',
-    onselect : function() {
-        viewRectangle();
-        Sandcastle.highlight(viewRectangle);
-    }
-},  
-]);
-
-
-
-//Sandcastle_End
-    Sandcastle.finishedLoading();
-}
-if (typeof Cesium !== "undefined") {
-    startup(Cesium);
-} else if (typeof require === "function") {
-    require(["Cesium"], startup);
-}
+	});
+	viewer.zoomTo(viewer.entities);
 </script>
 </body>
 </html>
