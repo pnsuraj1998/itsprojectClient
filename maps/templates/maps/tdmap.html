@@ -185,7 +185,6 @@ google.load("visualization", "1", {packages:["corechart"]});
         var t=0;
         //PHOTO , AUDIO???//////////////////////////////////////
         {% for j in farm %}
-	    var l=[];
             var totalarea={{j.Area|safe}};
             var totalincome={{j.Income|safe}};
             var Vil="{{j.Village|safe}}";
@@ -193,6 +192,8 @@ google.load("visualization", "1", {packages:["corechart"]});
             {% for k in farmpoints %}
                 var farmpointsid={{k.id|safe}};
                 var seqno={{k.Seqno|safe}};
+		    var l=[];
+
 	     	{% for l in k.Polygon.coordinates.0 %}
                 	var coordinates={{l|safe}};
 	 		l.push({ lat: {{l.1|safe}}, lng: {{l.0|safe}} });
