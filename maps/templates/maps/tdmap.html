@@ -246,7 +246,7 @@ google.load("visualization", "1", {packages:["corechart"]});
                         nameperc.push(name);
                         nameperc.push(perc);
                         listofnameperc.push(nameperc);
-			console.log(listofnameperc);
+			//console.log(listofnameperc);
                     }
                 {% endfor %}
                 crops.push(listofnameperc);
@@ -333,7 +333,7 @@ google.load("visualization", "1", {packages:["corechart"]});
         	marker.locate=locations[i][3];
        		markers.push(marker);
         }
-        
+        console.log(crops);
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
         	if(locations[i][4]==1)
@@ -432,7 +432,7 @@ google.load("visualization", "1", {packages:["corechart"]});
  }
 	        document.write(crops);
  function drawChart(k) {
-  console.log(k);
+  //console.log(k);
 	// document.write(k);
         var a='Task';
         var data = google.visualization.arrayToDataTable(k);
