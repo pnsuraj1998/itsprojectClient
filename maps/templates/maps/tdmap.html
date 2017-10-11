@@ -152,7 +152,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 	    var farmerid={{i.id|safe}};
 	    var farmername="{{i.Name|safe}}";
    	    var farmernumber="{{i.Number|safe}}"
-	
+	    var img_url="{{i.Photo|safe}}";
 	    {% for j in house %}
             if( {{j.F_id|safe}}==farmerid)
             {
