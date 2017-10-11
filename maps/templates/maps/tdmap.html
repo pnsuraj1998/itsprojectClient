@@ -347,7 +347,7 @@ google.load("visualization", "1", {packages:["corechart"]});
             	var span = document.getElementsByClassName("close")[0];
 			            modal.style.display = "block";
 			var checkin=locations[i][7];
-            drawChart(crops[checkin]);
+            drawChart(crops);
 		console.log(crops);
 
      
@@ -425,7 +425,7 @@ google.load("visualization", "1", {packages:["corechart"]});
  }
 	        document.write(crops);
  function drawChart(k) {
-  //console.log(k);
+  console.log(k);
         var a='Task';
         var data = google.visualization.arrayToDataTable(k);
 
