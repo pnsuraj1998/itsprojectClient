@@ -159,7 +159,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 		        var Vil="{{j.Village}}";
                 locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}}]);
             } 
-       {% endfor %}
+       	    {% endfor %}
     {% endfor %}
     
     {% for i in wells %}
@@ -178,7 +178,6 @@ google.load("visualization", "1", {packages:["corechart"]});
 			var stat="Not in use";
 		}
 		locations.push([stat,{{i.Poi.coordinates.1|safe}},{{i.Poi.coordinates.0|safe}},Vil,t,Avgyield,Depth]);
-    
      {% endfor %}
     
      {% for i in farmer %}
@@ -199,8 +198,8 @@ google.load("visualization", "1", {packages:["corechart"]});
                     {
                 	    var farmpointsid={{k.id|safe}};
                		    var seqno={{k.Seqno|safe}};
-		    	        var l=[];
-            		    var a=0; //new
+                        var l=[];
+                        var a=0; //new
 			            var b=0; //new
 			            var count=0;//new
 	     		        {% for l in k.Polygon.coordinates.0 %}
@@ -210,7 +209,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 				        b=b+{{l.0|safe}};
 				        count=count+1;
                 	//locations.push([farmername,{{l.1|safe}},{{l.0|safe}},Vil,t,totalarea,totalincome]);
-			            {% endfor %}
+			         {% endfor %}
 		                var a1=a/count;
 		                var b1=b/count;
 		                locations.push([farmername,a1,b1,Vil,t,totalarea,totalincome]);
@@ -222,7 +221,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 						    fillColor: "#0000FF",
 				    		fillOpacity: 0.05
  						 });
-					     flightPath0.setMap(map);
+				flightPath0.setMap(map);
                     }	
              {% endfor %}     
 	    }
@@ -270,21 +269,21 @@ google.load("visualization", "1", {packages:["corechart"]});
                     origin: new google.maps.Point(0,0), // origin
                    anchor: new google.maps.Point(0, 0) // anchor
               };
-          if (locations[i][5]<=5){
+          if (locations[i][5]<=2){
             marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon1,
          map: map
           });
         }
-         else if (locations[i][5]>5 && locations[i][5]<=10){
+         else if (locations[i][5]>2 && locations[i][5]<=4){
           marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon2,
          map: map
           });
         }
-         else if (locations[i][5]>10 && locations[i][5]<=15){
+         else {
           marker = new google.maps.Marker({
           position: new google.maps.LatLng(locations[i][1], locations[i][2]),
          icon:icon3,
