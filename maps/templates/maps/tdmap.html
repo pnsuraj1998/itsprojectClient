@@ -238,13 +238,13 @@ google.load("visualization", "1", {packages:["corechart"]});
                         var season="{{k.Season|safe}}";
                         var year={{k.Year|safe}};
                         var income={{k.Income|safe}};
-                        nameperc.append(name);
-                        nameperc.append(perc);
-                        listofnameperc.append(nameperc);
+                        nameperc.push(name);
+                        nameperc.push(perc);
+                        listofnameperc.push(nameperc);
                     }
                 {% endfor %}
-                crops.append(listofnameperc);
-	            document.write(crops);
+                crops.push(listofnameperc);
+	        document.write(crops);
            }
         {% endfor %}
      {% endfor %}
