@@ -351,17 +351,17 @@ google.load("visualization", "1", {packages:["corechart"]});
 
             // Get the <span> element that closes the modal
             	var span = document.getElementsByClassName("close")[0];
-			            modal.style.display = "block";
+			 modal.style.display = "block";
 			var checkin=locations[i][7];
 			//document.write(crops[checkin]);
-            drawChart(crops[checkin]);
+            		drawChart(crops[checkin]);
 		      //console.log(crops[checkin]);
 
      
 // When the user clicks on <span> (x), close the modal
-          	  span.onclick = function() {
-           	 modal.style.display = "none";
-		}
+          	  	span.onclick = function() {
+           	 		modal.style.display = "none";
+			}
 
 // When the user clicks anywhere outside of the modal, close it
            	 window.onclick = function(event) {
@@ -430,7 +430,7 @@ google.load("visualization", "1", {packages:["corechart"]});
       	}
     }
  }
-	        document.write(crops);
+	        //document.write(crops);
  function drawChart(k) {
   //console.log(k);
 	// document.write(k);
