@@ -23,14 +23,14 @@ var lon= 80.010054;
 
 	var greenCylinder = viewer.entities.add({
     name : 'Green cylinder with black outline',
-    position: Cesium.Cartesian3.fromDegrees(-100.0, 40.0, 200000.0),
+    position: Cesium.Cartesian3.fromDegrees(lon, lat, 20.0),
     cylinder : {
-        length : 400000.0,
-        topRadius : 200000.0,
-        bottomRadius : 200000.0,
-        material : Cesium.Color.GREEN.withAlpha(0.5),
+        length : 40.0,
+        topRadius : 20.0,
+        bottomRadius : 20.0,
+        material : Cesium.Color.BLUE.withAlpha(0.3),
         outline : true,
-        outlineColor : Cesium.Color.DARK_GREEN
+        outlineColor : Cesium.Color.BLACK
     }
 	});
 	viewer.zoomTo(viewer.entities);
