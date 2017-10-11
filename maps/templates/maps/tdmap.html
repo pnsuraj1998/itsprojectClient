@@ -345,22 +345,7 @@ google.load("visualization", "1", {packages:["corechart"]});
 
             // Get the <span> element that closes the modal
             	var span = document.getElementsByClassName("close")[0];
-			var checkin=locations[i][7];
-          	}
-
-          	else if(locations[i][4]==2)
-          	{
-          		cnt=locations[i][0]+" , Lat:"+locations[i][1]+" , Long:"+locations[i][2]+" , Depth:"+locations[i][6]+"m , Avg Yield(in Litres/day)"+locations[i][5];
-          	}
-            map.setZoom(19);
-            map.setCenter(marker.getPosition());
-            infowindow.setContent(cnt);
-            infowindow.open(map, marker);
-            
-
-// When the user clicks the button, open the modal 
-	
-            modal.style.display = "block";
+			            modal.style.display = "block";
             drawChart(crops[checkin]);
 		console.log(crops[checkin]);
 
@@ -376,6 +361,21 @@ google.load("visualization", "1", {packages:["corechart"]});
             modal.style.display = "none";
              }
             }
+          	}
+
+          	else if(locations[i][4]==2)
+          	{
+          		cnt=locations[i][0]+" , Lat:"+locations[i][1]+" , Long:"+locations[i][2]+" , Depth:"+locations[i][6]+"m , Avg Yield(in Litres/day)"+locations[i][5];
+          	}
+            map.setZoom(19);
+            map.setCenter(marker.getPosition());
+            infowindow.setContent(cnt);
+            infowindow.open(map, marker);
+            
+
+// When the user clicks the button, open the modal 
+	
+
         }
       })(marker, i));
       filterMarkers = function (category) {
