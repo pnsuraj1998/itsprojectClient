@@ -190,7 +190,8 @@ google.load("visualization", "1", {packages:["corechart"]});
                 var farmpointsid={{k.id|safe}};
                 var seqno={{k.Seqno|safe}};
 	     	{% for l in k.Polygon.coordinates %}
-                	var coordinates={{k.Polygon.coordinates|safe}};
+                	var coordinates={{l.0|safe}};
+	     		document.write(coordinates)
                 	locations.push([stat,{{l.1|safe}},{{l.0|safe}},Vil,t,0]);
 		{% endfor %}
             {% endfor %}
