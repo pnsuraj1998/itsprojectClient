@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # logging our apps
     'maps',
     'rest_framework',
     'rest_framework_gis',
