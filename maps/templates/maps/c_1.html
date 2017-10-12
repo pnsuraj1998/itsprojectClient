@@ -133,8 +133,12 @@ var redCone = viewer.entities.add({
 	     
 {% for i in wells %}
 	    var wellid={{i.id|safe}};
-	    var img_url="{{i.Photo|safe}}";
+	    var img_url="{{i.Photo|safe}}";	
+	    var Vil="{{i.Village|safe}}";
+     		var Depth={{i.Depth|safe}};
+	     	var Avgyield={{i.AvgYield|safe}};
             locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}},img_url]);
+  		
             
 	    
 	     
@@ -143,7 +147,7 @@ var greenCylinder = viewer.entities.add({
     name : 'Well',
     position : Cesium.Cartesian3.fromDegrees({{i.Poi.coordinates.0|safe}},{{i.Poi.coordinates.1|safe}},1),
     cylinder : {
-        length : 40.0,
+        length : {{i.Depth|safe}}*1.5,
         topRadius : 5.0,
         bottomRadius : 5.0,
         material : Cesium.Color.BLUE.withAlpha(0.7),
