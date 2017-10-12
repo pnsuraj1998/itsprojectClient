@@ -118,11 +118,7 @@ var redCone = viewer.entities.add({
 	     var bluePin = viewer.entities.add({
     name : 'Farmer_1 House',
     position : Cesium.Cartesian3.fromDegrees({{j.Poi.coordinates.0|safe}},{{j.Poi.coordinates.1|safe}},40),
-    decription : '<table class="cesium-infoBox-defaultTable"><tbody>' +
-                                 '<tr><th>BIN</th><td></td></tr>' +
-                                 '<tr><th>DOITT ID</th><td></td></tr>' +
-                                 '<tr><th>SOURCE ID</th><td></td></tr>' +
-                                 '</tbody></table>';
+ 
     billboard : {
         image : pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48).toDataURL(),
         verticalOrigin : Cesium.VerticalOrigin.BOTTOM
@@ -135,14 +131,17 @@ var redCone = viewer.entities.add({
 	     
 	     
 	     
-	     
-	     
-	     
+{% for i in wells %}
+	    var wellid={{i.id|safe}};
+	    var img_url="{{i.Photo|safe}}";
+            locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}},img_url]);
+            
+	    
 	     
 
 var greenCylinder = viewer.entities.add({
     name : 'Well',
-    position : Cesium.Cartesian3.fromDegrees(lon,lat,1),
+    position : Cesium.Cartesian3.fromDegrees({{j.Poi.coordinates.0|safe}},{{j.Poi.coordinates.1|safe}},1),
     cylinder : {
         length : 40.0,
         topRadius : 5.0,
@@ -155,7 +154,7 @@ var greenCylinder = viewer.entities.add({
     }
 });
 
-
+  {% endfor %}
 
 
 console.log(greenCylinder.name);
