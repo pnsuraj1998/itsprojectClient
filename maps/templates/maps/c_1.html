@@ -68,41 +68,9 @@ var crop_det="{{crop}}";
 	     {% endfor %}
 	    
 	     
-	     {% for i in farm %}
-	    var farmid={{i.id|safe}};
-	    
-	    {% for j in farmpoints %}
-            if( {{j.Farm_id|safe}}==farmerid)
-            {
-                locations.push([{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}}]);
-            } 
-       	    {% endfor %}
-	    
-	    var greenWall = viewer.entities.add({
-    name : 'Farm',
-    wall : {
-        positions : Cesium.Cartesian3.fromDegreesArrayHeights(locations),
-        material : Cesium.Color.GREEN,
-        outline : true
-    }
-});
-
-	     
-	     
-	     {% endfor %}
-	    
-	    
 	
+	    
 
-
-
-
-
-	     
-	     
-	     
-	     
- 
 	     
 	     {% for i in farmer %}
 	    var farmerid={{i.id|safe}};
