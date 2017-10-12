@@ -86,16 +86,7 @@ var crop_det="{{crop}}";
 
 
 
-var redCone = viewer.entities.add({
-    name : 'Red cone',
-    position: Cesium.Cartesian3.fromDegrees(lon+0.002,lat+0.0001),
-    cylinder : {
-        length : 40.0,
-        topRadius : 0.0,
-        bottomRadius : 20.0,
-        material : Cesium.Color.RED
-    }
-});
+
 	     
 	     
 	     
@@ -114,9 +105,18 @@ var redCone = viewer.entities.add({
 		        var Vil="{{j.Village}}";
                 locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}},img_url]);
             } 
-	     
+	     var redCone = viewer.entities.add({
+    name : 'Red cone',
+    position: Cesium.Cartesian3.fromDegrees({{j.Poi.coordinates.0|safe}},{{j.Poi.coordinates.1|safe}}),
+    cylinder : {
+        length : 30,
+        topRadius : 0.0,
+        bottomRadius : 15,
+        material : Cesium.Color.RED
+    }
+});
 	     var bluePin = viewer.entities.add({
-    name : 'Farmer_1 House',
+    name : "{{i.Name|safe}}",
     position : Cesium.Cartesian3.fromDegrees({{j.Poi.coordinates.0|safe}},{{j.Poi.coordinates.1|safe}},40),
  
     billboard : {
