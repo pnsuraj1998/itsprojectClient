@@ -43,7 +43,30 @@ var lon= 80.010054;
 
 var farmer_det="{{farmer}}";
 console.log(farmer_det);
+	
+var farm_det="{{farm}}";
+var house_det="{{house}}";
+var farmpts="{{farmpoints}}";
+var well_det="{{wells}}";
+var member_det="{{members}}";
+var crop_det="{{crop}}";
 
+
+	{% for i in farmer %}
+	    var farmerid={{i.id|safe}};
+	    var farmername="{{i.Name|safe}}";
+   	    var farmernumber="{{i.Number|safe}}"
+	    var img_url="{{i.Photo|safe}}";
+	    {% for j in house %}
+            if( {{j.F_id|safe}}==farmerid)
+            {
+                var t=1;
+		        var Vil="{{j.Village}}";
+                locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}},img_url]);
+            } 
+       	    {% endfor %}
+	    
+	    
 	var greenWall = viewer.entities.add({
     name : 'Farm',
     wall : {
@@ -72,15 +95,44 @@ var redCone = viewer.entities.add({
         material : Cesium.Color.RED
     }
 });
-var bluePin = viewer.entities.add({
+	     
+	     
+	     
+	     
+ 
+	     
+	     {% for i in farmer %}
+	    var farmerid={{i.id|safe}};
+	    var farmername="{{i.Name|safe}}";
+   	    var farmernumber="{{i.Number|safe}}"
+	    var img_url="{{i.Photo|safe}}";
+	    {% for j in house %}
+            if( {{j.F_id|safe}}==farmerid)
+            {
+                var t=1;
+		        var Vil="{{j.Village}}";
+                locations.push([farmername,{{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},Vil,t,{{j.NoP|safe}},img_url]);
+            } 
+	     
+	     var bluePin = viewer.entities.add({
     name : 'Farmer_1 House',
-    position : Cesium.Cartesian3.fromDegrees(lon+0.002,lat+0.0001,40),
+    position : Cesium.Cartesian3.fromDegrees({{j.Poi.coordinates.1|safe}},{{j.Poi.coordinates.0|safe}},40),
     billboard : {
         image : pinBuilder.fromColor(Cesium.Color.ROYALBLUE, 48).toDataURL(),
         verticalOrigin : Cesium.VerticalOrigin.BOTTOM
     }
 });
+       	    {% endfor %}
 
+
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
 
 var greenCylinder = viewer.entities.add({
     name : 'Well',
