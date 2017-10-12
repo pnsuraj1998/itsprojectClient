@@ -156,7 +156,9 @@ var greenCylinder = viewer.entities.add({
         //position : Cesium.Cartesian3.fromDegrees(-75.170726, 39.9208667),
         verticalOrigin : Cesium.VerticalOrigin.BOTTOM,
     }
-    var wellPin = viewer.entities.add({
+    
+});
+var wellPin = viewer.entities.add({
     name : 'Well',
     position : Cesium.Cartesian3.fromDegrees({{i.Poi.coordinates.0|safe}},{{i.Poi.coordinates.1|safe}},40),
  
@@ -164,7 +166,6 @@ var greenCylinder = viewer.entities.add({
         image : pinBuilder.fromColor(Cesium.Color.CADETBLUE , 48).toDataURL(),
         verticalOrigin : Cesium.VerticalOrigin.BOTTOM
     }
-});
 });
 
   {% endfor %}
