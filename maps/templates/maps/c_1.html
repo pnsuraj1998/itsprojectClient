@@ -127,8 +127,8 @@ var greenCylinder = viewer.entities.add({
     position : Cesium.Cartesian3.fromDegrees({{i.Poi.coordinates.0|safe}},{{i.Poi.coordinates.1|safe}},1),
     cylinder : {
         length : {{i.Depth|safe}}*1.5,
-        topRadius :  {{i.Depth|safe}}*0.7
-        bottomRadius : 5.0,
+        topRadius :  {{i.Depth|safe}}*0.7,
+        bottomRadius : {{i.Depth|safe}}*0.7,
         material : Cesium.Color.BLUE.withAlpha(0.7),
         outline : true,
         outlineColor : Cesium.Color.DARK_BLUE,
