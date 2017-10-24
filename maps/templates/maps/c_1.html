@@ -123,7 +123,7 @@ var crop_det="{{crop}}";
 	     
 
 var greenCylinder = viewer.entities.add({
-    name : 'Well',
+    name : 'Well'+'ss'+str({{i.depth|safe}}),
     position : Cesium.Cartesian3.fromDegrees({{i.Poi.coordinates.0|safe}},{{i.Poi.coordinates.1|safe}},1),
     cylinder : {
         length : {{i.Depth|safe}}*1.5,
